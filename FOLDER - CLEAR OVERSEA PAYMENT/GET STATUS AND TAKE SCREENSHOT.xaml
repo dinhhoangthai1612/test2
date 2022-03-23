@@ -1,0 +1,266 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="GET_STATUS_AND_TAKE_SCREENSHOT" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="getStatusBar" Type="OutArgument(x:String)" />
+    <x:Property Name="getCode" Type="InArgument(x:String)" />
+    <x:Property Name="checkExist" Type="InOutArgument(x:Boolean)" />
+  </x:Members>
+  <mva:VisualBasic.Settings>
+    <x:Null />
+  </mva:VisualBasic.Settings>
+  <sap:VirtualizedContainerService.HintSize>979,1977</sap:VirtualizedContainerService.HintSize>
+  <sap2010:WorkflowViewState.IdRef>GET_STATUS_AND_TAKE_SCREENSHOT_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <scg:List x:TypeArguments="x:String" Capacity="27">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
+      <x:String>System.Activities.DynamicUpdate</x:String>
+      <x:String>System.Reflection</x:String>
+      <x:String>System.Runtime.InteropServices</x:String>
+      <x:String>System.Text.RegularExpressions</x:String>
+      <x:String>Microsoft.VisualBasic.CompilerServices</x:String>
+    </scg:List>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <scg:List x:TypeArguments="AssemblyReference" Capacity="64">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>Microsoft.Bcl.AsyncInterfaces</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>System.Memory</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>UiPath.IntelligentOCR</AssemblyReference>
+      <AssemblyReference>UiPath.OmniPage.Activities.Design</AssemblyReference>
+      <AssemblyReference>UiPath.Mail</AssemblyReference>
+      <AssemblyReference>UiPath.Presentations</AssemblyReference>
+      <AssemblyReference>UiPath.OCR.Activities.Design</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationCore</AssemblyReference>
+      <AssemblyReference>UiPath.Word</AssemblyReference>
+      <AssemblyReference>OfficeDevPnP.Core</AssemblyReference>
+      <AssemblyReference>UiPathTeam.SharePoint</AssemblyReference>
+      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities.Design</AssemblyReference>
+    </scg:List>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence DisplayName="GET STATUS AND TAKE SCREENSHOT" sap:VirtualizedContainerService.HintSize="526,1912" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="ui:Image" Name="imageError" />
+      <Variable x:TypeArguments="x:String" Name="folderError" />
+    </Sequence.Variables>
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <Assign sap:VirtualizedContainerService.HintSize="484,60" sap2010:WorkflowViewState.IdRef="Assign_3">
+      <Assign.To>
+        <OutArgument x:TypeArguments="x:String">[folderError]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="x:String">["\\ykkvnm.com\vnmfs\YKKDATA\DEPARTMENT\Improve Operation\RPA\Uipath\Template\CLEAR OVERSEA PAYMENT\Error Image\"]</InArgument>
+      </Assign.Value>
+    </Assign>
+    <ui:GetValue ContinueOnError="True" DisplayName="GET ERROR" sap:VirtualizedContainerService.HintSize="484,106" sap2010:WorkflowViewState.IdRef="GetValue_1">
+      <ui:GetValue.Target>
+        <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="2c8cf4b7-39fd-4686-b552-a2f675ed3492" InformativeScreenshot="343c6726fad085c6df032de78c54d4af" Selector="&lt;wnd app='saplgpad.exe' cls='SAP_FRONTEND_SESSION' title='*' /&gt;&lt;wnd cls='Afx:*' idx='3' /&gt;" TimeoutMS="5000">
+          <ui:Target.WaitForReady>
+            <InArgument x:TypeArguments="ui:WaitForReady" />
+          </ui:Target.WaitForReady>
+        </ui:Target>
+      </ui:GetValue.Target>
+      <ui:GetValue.Value>
+        <OutArgument x:TypeArguments="x:String">[getStatusBar]</OutArgument>
+      </ui:GetValue.Value>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:GetValue>
+    <Assign sap:VirtualizedContainerService.HintSize="484,60" sap2010:WorkflowViewState.IdRef="Assign_1">
+      <Assign.To>
+        <OutArgument x:TypeArguments="x:String">[getStatusBar]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="x:String">[Regex.Replace(getStatusBar,"[^0-9a-zA-Z ]+", "")]</InArgument>
+      </Assign.Value>
+    </Assign>
+    <If Condition="[getStatusBar = &quot;&quot;]" sap:VirtualizedContainerService.HintSize="484,339" sap2010:WorkflowViewState.IdRef="If_1">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+      <If.Then>
+        <Sequence sap:VirtualizedContainerService.HintSize="304,152" sap2010:WorkflowViewState.IdRef="Sequence_2">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <Assign sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_2">
+            <Assign.To>
+              <OutArgument x:TypeArguments="x:String">[getStatusBar]</OutArgument>
+            </Assign.To>
+            <Assign.Value>
+              <InArgument x:TypeArguments="x:String">Not detect error</InArgument>
+            </Assign.Value>
+          </Assign>
+        </Sequence>
+      </If.Then>
+    </If>
+    <ui:TakeScreenshot WaitBefore="{x:Null}" DisplayName="TAKE SCREENSHOOT SAP" sap:VirtualizedContainerService.HintSize="484,106" sap2010:WorkflowViewState.IdRef="TakeScreenshot_1" Screenshot="[imageError]">
+      <ui:TakeScreenshot.Target>
+        <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="08bba445-27b6-4783-b336-32b39c0517c9" InformativeScreenshot="e4277e1c8e0d2cffce943c70403e7cd8" Selector="&lt;wnd app='saplgpad.exe' cls='SAP_FRONTEND_SESSION' title='*' /&gt;" TimeoutMS="5000">
+          <ui:Target.WaitForReady>
+            <InArgument x:TypeArguments="ui:WaitForReady" />
+          </ui:Target.WaitForReady>
+        </ui:Target>
+      </ui:TakeScreenshot.Target>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:TakeScreenshot>
+    <ui:SaveImage sap2010:Annotation.AnnotationText="folderError + getTransaction + &quot;_&quot; + getStatusBar+ &quot;_&quot; + now.ToString(&quot;HHmmss&quot;) + &quot;.jpg&quot;" DisplayName="Save Image" FileName="[folderError + getCode + &quot;_&quot; + getStatusBar+ &quot;_&quot; + now.ToString(&quot;HHmmss&quot;) + &quot;.jpg&quot;]" sap:VirtualizedContainerService.HintSize="484,134" sap2010:WorkflowViewState.IdRef="SaveImage_1" Image="[imageError]">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:SaveImage>
+    <ui:CloseWindow UseWindow="{x:Null}" ContinueOnError="True" DisplayName="Close popup" sap:VirtualizedContainerService.HintSize="484,68" sap2010:WorkflowViewState.IdRef="CloseWindow_2" Selector="&lt;wnd app='saplgpad.exe' cls='#32770' title='Information' idx='*' /&gt;" TimeoutMS="3000" WaitForReady="INTERACTIVE">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:CloseWindow>
+    <ui:RetryScope DisplayName="Retry Scope" sap:VirtualizedContainerService.HintSize="484,667" sap2010:WorkflowViewState.IdRef="RetryScope_2" NumberOfRetries="3" RetryInterval="00:00:01">
+      <ui:RetryScope.ActivityBody>
+        <ActivityAction>
+          <Sequence DisplayName="Action" sap:VirtualizedContainerService.HintSize="376,402" sap2010:WorkflowViewState.IdRef="Sequence_5">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <ui:SendHotkey ClickBeforeTyping="{x:Null}" DelayBetweenKeys="{x:Null}" EmptyField="{x:Null}" SendWindowMessages="{x:Null}" Activate="True" ContinueOnError="True" DelayBefore="0" DelayMS="0" DisplayName="Send Hotkey" sap:VirtualizedContainerService.HintSize="334,116" sap2010:WorkflowViewState.IdRef="SendHotkey_3" Key="f3" KeyModifiers="Shift" SpecialKey="True">
+              <ui:SendHotkey.Target>
+                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="657179e4-8c34-423c-8d5e-7d388fc5f748" Selector="&lt;wnd app='saplgpad.exe' cls='SAP_FRONTEND_SESSION' title='*' /&gt;" TimeoutMS="3000">
+                  <ui:Target.WaitForReady>
+                    <InArgument x:TypeArguments="ui:WaitForReady" />
+                  </ui:Target.WaitForReady>
+                </ui:Target>
+              </ui:SendHotkey.Target>
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+            </ui:SendHotkey>
+            <ui:ClickImage SendWindowMessages="{x:Null}" ClickType="CLICK_SINGLE" ContinueOnError="True" DelayBefore="0" DelayMS="0" DisplayName="YES" sap:VirtualizedContainerService.HintSize="334,154" sap2010:WorkflowViewState.IdRef="ClickImage_4" KeyModifiers="None" MouseButton="BTN_LEFT">
+              <ui:ClickImage.CursorPosition>
+                <ui:CursorPosition Position="Center">
+                  <ui:CursorPosition.OffsetX>
+                    <InArgument x:TypeArguments="x:Int32" />
+                  </ui:CursorPosition.OffsetX>
+                  <ui:CursorPosition.OffsetY>
+                    <InArgument x:TypeArguments="x:Int32" />
+                  </ui:CursorPosition.OffsetY>
+                </ui:CursorPosition>
+              </ui:ClickImage.CursorPosition>
+              <ui:ClickImage.Image>
+                <ui:ImageTarget Image="{x:Null}" Accuracy="0.8" Profile="Basic" TargetImageBase64="iVBORw0KGgoAAAANSUhEUgAAACoAAAAQCAYAAABgIu2QAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAExSURBVEhL7ZIxbsJAEEXnGCkoUrpIEVyFhhKlDJUVeqwUFGlRhMgNVqkpkMgNKLZAQuIaaFNQpKBAucLPGGOYXaywtiCRpRRP9n7PSs8zQ/iaowpUSHQzRRUgrCeoAoTPN/jxhJgI8budm9drUNiGEdklIKyG8GYcslQLJjsvWmhQCC1rLkQxUUY/EhqD3tF7Sg8qJBB3nqgGtbDvpbl7x4/CovsuJk/ZXcYSl923JtGB+hVRxgxq287EY5l3eIflGiTnXVfdlSlBKdHc3dxmh/GmZOOXK+H+oB+Ej2cUZt5kqRtoK3/gDrrZMeblClRvwuR8+wnCsovCzO5YNIB2ch3xjvYjcU5rTD+Amu3qRgEout/X+HJWUSwjqFsx+kwokcuy3HunKSf6B/yLnpcuvgEXJHQR1fWfZwAAAABJRU5ErkJggg==" />
+              </ui:ClickImage.Image>
+              <ui:ClickImage.Target>
+                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="9e201570-54e6-44d2-a1c1-60f036cc27a6" Selector="&lt;wnd app='saplgpad.exe' cls='SAP_FRONTEND_SESSION' title='*' /&gt;" TimeoutMS="3000">
+                  <ui:Target.WaitForReady>
+                    <InArgument x:TypeArguments="ui:WaitForReady" />
+                  </ui:Target.WaitForReady>
+                </ui:Target>
+              </ui:ClickImage.Target>
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+            </ui:ClickImage>
+          </Sequence>
+        </ActivityAction>
+      </ui:RetryScope.ActivityBody>
+      <ui:RetryScope.Condition>
+        <ActivityFunc x:TypeArguments="x:Boolean">
+          <ui:ImageFound DisplayName="CHECK MAIN MENU" Found="[checkExist]" sap:VirtualizedContainerService.HintSize="334,106" sap2010:WorkflowViewState.IdRef="ImageFound_3">
+            <ui:ImageFound.Image>
+              <ui:ImageTarget Image="{x:Null}" Accuracy="0.8" Profile="Basic" TargetImageBase64="iVBORw0KGgoAAAANSUhEUgAAAJsAAAAWCAYAAADXT+6KAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAASESURBVGhD7ZT7b1RFFMfPn9P0le7yRwhKjZa2pjT+pDwDhpRSMWlpG8IjVGMgCJjQl9s0mJjQR1qkMXRLC9YiIPERjWzrC6NG/4bj3N1775yZe+bO3KKbppkfPsnmzPe8vjN34dH6P+jxVAN4WPobPZ5qAA+e/oUeTzWAtR//RI+nGsDqD3+gnUl8BQAhwev4vou+aRA/SWhW8VgT0ei8NqnpdSz5sAOPLXB5WwEXf7YfcP/739HMPXwr9UIF7ROJvPfaNU3TAH6sae7fHsB6qmGof+eemkOx5TNzbRWc/NmGwMp3z5BnBY+Sh1Z3coU9e/lDmvMMb5zcIU2MEGbeIBpdJ2urPaG9oORQ3iUXps62tXH1ZzsCy9/+hizXOqUZjcIMRjPU1olDNHZrAOvinDz5reeLR9UYnkEej96SZ0NtUVw8ordXSA6lgM1RbdBmUKB9VJqvJfW0tySoT/up8yo7p84icPaH0cfkxezEFxcNvcuItoI8DzHvn01jApa++RU5LjBFm6/y2grLeIQ8oCPzH8kLauzHSaqd7ydG0zOSU65BcihXGfMI8Zy0TwJSP61eeT59tzBPiXfihWg+lgz+KD4kqez3/Jq6nuVKP+v+jhoLsPj1L8gx0ZPnC4fsvmLW1/bcFbFx3B3r9+L5VG0Qv4uHyb+QjCc53yp1SdReKrRHHg/PidhcP9ZGucK0CaIP5qzMweSJczqH7oeOuz80rvlQnjXQZtTQva7sjfOgddxtfyePZMwE3HnyM5o4Z7nUc5F29hQZ5hQWyvExfInTPllSHhVH7YmlUMthqstj3CGcs3CC+ahax7Q6dGbx2GZF7AN5aenzCjL4Q+c11c2qMRHkuuzv5pEd+Oyrn9CF8W69YR4PzQRnRTxkeTwAHXg2qjXTJ43XaezDcdKT5XKH1O8Z5TWC5Lwqtd3FijZtHlL/7J4oHuw9Kh+KdeYs/pC61DOFrBoT4f257O/okQ1YeLyBCqJwjSiQiAfQi27owzEROxNfQhodeCasMdadi+M14sITPSzQfi9e5jXcnAuPi3iwIcrN4cGZlJxErmlPuZeJTP6wc2tk1ZjuUseyv7MmBbj9aAMpI8ejx9CBp+nZtHiEcZMcHpgWsUvq4iNGfVSriAfIhZdr0Bwro7grUTPJ6ZZIA7jrUhin84SzlnUto0qu3F98DMeLbDwirm0iqz9Ur+8XnAWzPq8mvINgdpf9s3hkAz59uIGSIu6PH4OJHO6fCrT04qMYYUozU48J84ep3gXFRAZhissONV1FoaPzM5Rryd7DXepjq9QgsyXYhD+WmYIH8l9oKv1c9nfRhPs4APNfrqPKIu4zXNbOi7ympmuR5Ifc7FXMHBSx6+TC2BwLg+QfiyOe76L2KFt6ybw53Hcz0Jn2rMyq91ZqNvTidU4Tszl/uFy+xuY1spfL/i4ad2DuwTp6bIzgTmo0q/HYgNm1dfSksYhv1suv+gXx78nrPDZgZq2EHhN38A3y0ODVYUbjcQWmvyihx1MNYGq1hB5PNYCpz8UPj+d/p4T/AtdsmCJ9cwWrAAAAAElFTkSuQmCC" />
+            </ui:ImageFound.Image>
+            <ui:ImageFound.Target>
+              <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="2e843023-de4f-436b-9296-8a3db59c174d" Selector="&lt;wnd app='saplgpad.exe' cls='SAP_FRONTEND_SESSION' title='SAP Easy Access*' /&gt;" TimeoutMS="10000">
+                <ui:Target.WaitForReady>
+                  <InArgument x:TypeArguments="ui:WaitForReady" />
+                </ui:Target.WaitForReady>
+              </ui:Target>
+            </ui:ImageFound.Target>
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+          </ui:ImageFound>
+        </ActivityFunc>
+      </ui:RetryScope.Condition>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:RetryScope>
+  </Sequence>
+</Activity>

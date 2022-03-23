@@ -1,0 +1,1038 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="WINGS_CHECK_MATERIAL_STATUS" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:av="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:ee="clr-namespace:ExcelCustomActivities.Excel;assembly=ExcelCustomActivities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="EndStatus" Type="InOutArgument(x:String)" />
+    <x:Property Name="EndMessage" Type="InOutArgument(x:String)" />
+    <x:Property Name="Order_Number" Type="InOutArgument(x:String)" />
+  </x:Members>
+  <mva:VisualBasic.Settings>
+    <x:Null />
+  </mva:VisualBasic.Settings>
+  <sap:VirtualizedContainerService.HintSize>842,701</sap:VirtualizedContainerService.HintSize>
+  <sap2010:WorkflowViewState.IdRef>ISSUE_PO_SYSTEM_ver_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <scg:List x:TypeArguments="x:String" Capacity="42">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>UiPath.Database</x:String>
+      <x:String>System.Xml.Serialization</x:String>
+      <x:String>Microsoft.VisualBasic.CompilerServices</x:String>
+      <x:String>UiPath.Excel</x:String>
+    </scg:List>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <scg:List x:TypeArguments="AssemblyReference" Capacity="32">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>UiPath.Database</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>UiPath.IntelligentOCR</AssemblyReference>
+      <AssemblyReference>UiPath.Mail</AssemblyReference>
+      <AssemblyReference>UiPath.OmniPage.Activities.Design</AssemblyReference>
+      <AssemblyReference>UiPath.CV</AssemblyReference>
+      <AssemblyReference>UiPath.Word</AssemblyReference>
+      <AssemblyReference>System.Data.Entity</AssemblyReference>
+    </scg:List>
+  </TextExpression.ReferencesForImplementation>
+  <Flowchart DisplayName="Wings Check Material Status" sap:VirtualizedContainerService.HintSize="634,636" sap2010:WorkflowViewState.IdRef="Flowchart_1">
+    <Flowchart.Variables>
+      <Variable x:TypeArguments="ui:WorkbookApplication" Name="wbInput" />
+      <Variable x:TypeArguments="x:String" Name="stQty" />
+      <Variable x:TypeArguments="x:String" Name="stShipMode" />
+      <Variable x:TypeArguments="x:String" Name="stVendor" />
+      <Variable x:TypeArguments="x:String" Name="stContract" />
+      <Variable x:TypeArguments="sd:DataTable" Name="dtDataInput" />
+      <Variable x:TypeArguments="x:String" Name="stItemCode" />
+      <Variable x:TypeArguments="x:String" Name="stWarning" />
+      <Variable x:TypeArguments="ui:GenericValue" Name="grExcelInputRow" />
+      <Variable x:TypeArguments="ui:GenericValue" Name="grWingsRow300201" />
+      <Variable x:TypeArguments="x:String" Name="stCellAddress" />
+      <Variable x:TypeArguments="ui:GenericValue" Name="grKeepCode" />
+      <Variable x:TypeArguments="x:Object" Name="grLastRow" />
+      <Variable x:TypeArguments="x:Int32" Name="in32Cm1Length" />
+      <Variable x:TypeArguments="x:Int32" Name="in32Cm2Length" />
+      <Variable x:TypeArguments="x:Int32" Name="in32Cm3Length" />
+      <Variable x:TypeArguments="ui:GenericValue" Name="grWingsRow300212" />
+      <Variable x:TypeArguments="x:String" Name="stMain" />
+      <Variable x:TypeArguments="x:String" Name="stColor" />
+      <Variable x:TypeArguments="x:String" Name="stLengthUnit" />
+      <Variable x:TypeArguments="x:String" Name="stlength" />
+      <Variable x:TypeArguments="x:Boolean" Name="boCompareFlag" />
+      <Variable x:TypeArguments="x:String" Name="stSecondPQ" />
+      <Variable x:TypeArguments="x:Boolean" Name="boExcelErrorFlag" />
+      <Variable x:TypeArguments="ui:GenericValue" Name="Requestor" />
+      <Variable x:TypeArguments="x:String" Name="ItemCompare" />
+      <Variable x:TypeArguments="s:String[]" Default="[{&quot;000032&quot;,&quot;000056&quot;,&quot;000013&quot;}]" Name="ListVendor" />
+      <Variable x:TypeArguments="x:String" Name="FirstPQ" />
+      <Variable x:TypeArguments="x:String" Name="PleaseCheck" />
+      <Variable x:TypeArguments="ui:GenericValue" Name="ColorLength" />
+      <Variable x:TypeArguments="x:String" Name="DateCompare" />
+      <Variable x:TypeArguments="ui:GenericValue" Name="Comment1" />
+      <Variable x:TypeArguments="ui:GenericValue" Name="Comment2" />
+      <Variable x:TypeArguments="ui:GenericValue" Name="Comment3" />
+      <Variable x:TypeArguments="ui:GenericValue" Name="Comment4" />
+      <Variable x:TypeArguments="ui:GenericValue" Name="grWingsRow300221" />
+      <Variable x:TypeArguments="x:String" Name="ContractCompare" />
+      <Variable x:TypeArguments="ui:GenericValue" Name="grWingsRow300227" />
+      <Variable x:TypeArguments="x:String" Name="stNoCommer" />
+      <Variable x:TypeArguments="x:String" Name="stTargetMonth" />
+      <Variable x:TypeArguments="x:String" Name="Warning12" />
+      <Variable x:TypeArguments="x:String" Name="QtCompare" />
+      <Variable x:TypeArguments="x:String" Name="VendorCompare" />
+      <Variable x:TypeArguments="x:Int32" Name="ItemLength" />
+      <Variable x:TypeArguments="ui:GenericValue" Name="Comment4Length" />
+      <Variable x:TypeArguments="ui:GenericValue" Name="VendorLength" />
+      <Variable x:TypeArguments="ui:GenericValue" Name="ShipModeLength" />
+      <Variable x:TypeArguments="ui:GenericValue" Name="Unit" />
+      <Variable x:TypeArguments="ui:GenericValue" Name="ItemName" />
+      <Variable x:TypeArguments="x:Int32" Name="in32DataRow" />
+      <Variable x:TypeArguments="sd:DataTable" Name="dtDepot" />
+      <Variable x:TypeArguments="x:String" Name="stDepot" />
+      <Variable x:TypeArguments="x:String" Name="ColorCompare" />
+      <Variable x:TypeArguments="x:String" Name="stUnit" />
+      <Variable x:TypeArguments="sd:DataTable" Name="dt_Path" />
+      <Variable x:TypeArguments="x:String" Name="Path_Folder" />
+      <Variable x:TypeArguments="x:String" Name="Path_Downloads" />
+      <Variable x:TypeArguments="x:String" Name="Path_Template" />
+      <Variable x:TypeArguments="sd:DataTable" Name="dt_Wings" />
+      <Variable x:TypeArguments="x:String" Name="Wing_User" />
+      <Variable x:TypeArguments="x:String" Name="Wing_Password" />
+      <Variable x:TypeArguments="x:String" Name="changePOFlag" />
+      <Variable x:TypeArguments="x:Int32" Name="currentRow" />
+      <Variable x:TypeArguments="sd:DataTable" Name="dt_Result" />
+      <Variable x:TypeArguments="x:String" Name="stPQNum" />
+      <Variable x:TypeArguments="x:String" Name="stPONum" />
+      <Variable x:TypeArguments="x:String" Name="POType" />
+      <Variable x:TypeArguments="x:Boolean" Name="boLastPageFlag" />
+      <Variable x:TypeArguments="x:String" Name="DisplayMessage" />
+      <Variable x:TypeArguments="x:String" Name="stReqDate" />
+      <Variable x:TypeArguments="x:Int32" Name="WingsRow" />
+      <Variable x:TypeArguments="x:Int32" Name="startF" />
+      <Variable x:TypeArguments="x:Int32" Name="startT" />
+      <Variable x:TypeArguments="x:Boolean" Name="issuePOFlag" />
+      <Variable x:TypeArguments="x:String" Name="stSub" />
+      <Variable x:TypeArguments="x:String" Name="stOrder" />
+      <Variable x:TypeArguments="x:String" Name="stKeepCode" />
+      <Variable x:TypeArguments="x:String" Name="stMainMenu" />
+      <Variable x:TypeArguments="x:Boolean" Name="boStopFlag" />
+      <Variable x:TypeArguments="x:String" Name="FirstPO" />
+      <Variable x:TypeArguments="x:String" Name="SecondPO" />
+      <Variable x:TypeArguments="x:String" Name="listPR" />
+      <Variable x:TypeArguments="sd:DataTable" Name="dt_PRStatus" />
+      <Variable x:TypeArguments="x:String" Name="stPR" />
+      <Variable x:TypeArguments="x:String" Name="stLine" />
+      <Variable x:TypeArguments="x:String" Name="stStatus" />
+      <Variable x:TypeArguments="x:String" Name="stType" />
+      <Variable x:TypeArguments="x:String" Name="stExist" />
+      <Variable x:TypeArguments="sd:DataTable" Name="dt_PROlder" />
+      <Variable x:TypeArguments="sd:DataTable" Name="dt_PRNew" />
+      <Variable x:TypeArguments="x:Int32" Name="dt_rowC" />
+    </Flowchart.Variables>
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+        <av:Point x:Key="ShapeLocation">270,2.5</av:Point>
+        <av:Size x:Key="ShapeSize">60,75</av:Size>
+        <av:PointCollection x:Key="ConnectorLocation">300,77.5 300,112</av:PointCollection>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <Flowchart.StartNode>
+      <x:Reference>__ReferenceID1</x:Reference>
+    </Flowchart.StartNode>
+    <FlowStep x:Name="__ReferenceID0">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <av:Point x:Key="ShapeLocation">200,217</av:Point>
+          <av:Size x:Key="ShapeSize">200,66</av:Size>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+      <Sequence DisplayName="Sq/Main Process" sap:VirtualizedContainerService.HintSize="3064,8466" sap2010:WorkflowViewState.IdRef="Sequence_242">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+        <ui:ExcelApplicationScope Password="{x:Null}" sap2010:Annotation.AnnotationText="Path_Folder+left(TimeStamp,6)+&quot;\&quot;+RobotName+&quot;\Output\&quot;+FileName" CreateNewFile="False" DisplayName="Get data from Excel File" sap:VirtualizedContainerService.HintSize="3022,8177" sap2010:WorkflowViewState.IdRef="ExcelApplicationScope_1" InstanceCachePeriod="3000" Workbook="[wbInput]" WorkbookPath="H:\_SCANNER\0.LUU HINH CUA CAC BO PHAN\6.SLD\SLD - RPA\Wings Material Status_RPA_NOT OPEN.xlsx">
+          <ui:ExcelApplicationScope.Body>
+            <ActivityAction x:TypeArguments="ui:WorkbookApplication">
+              <ActivityAction.Argument>
+                <DelegateInArgument x:TypeArguments="ui:WorkbookApplication" Name="ExcelWorkbookScope" />
+              </ActivityAction.Argument>
+              <Sequence sap:VirtualizedContainerService.HintSize="2988,8037" sap2010:WorkflowViewState.IdRef="Sequence_241">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+                <ui:ExcelReadRange AddHeaders="False" DataTable="[dt_PROlder]" DisplayName="Read Range" sap:VirtualizedContainerService.HintSize="2946,59" sap2010:WorkflowViewState.IdRef="ExcelReadRange_2" Range="A3" SheetName="REMAIND PR" />
+                <Assign sap:VirtualizedContainerService.HintSize="2946,60" sap2010:WorkflowViewState.IdRef="Assign_261">
+                  <Assign.To>
+                    <OutArgument x:TypeArguments="x:Object">[grLastRow]</OutArgument>
+                  </Assign.To>
+                  <Assign.Value>
+                    <InArgument x:TypeArguments="x:Int32">[dt_PROlder.Rows.Count]</InArgument>
+                  </Assign.Value>
+                </Assign>
+                <If Condition="[Int32.Parse(grLastRow.ToString) &gt; 0]" sap:VirtualizedContainerService.HintSize="2946,1264" sap2010:WorkflowViewState.IdRef="If_58">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                      <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <If.Then>
+                    <Sequence sap:VirtualizedContainerService.HintSize="376,1107" sap2010:WorkflowViewState.IdRef="Sequence_250">
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                      <ui:FilterDataTable DataTable="[dt_PROlder]" DisplayName="Filter Data Table" FilterRowsMode="Remove" sap:VirtualizedContainerService.HintSize="334,59" sap2010:WorkflowViewState.IdRef="FilterDataTable_3" OutputDataTable="[dt_PROlder]" SelectColumnsMode="Keep">
+                        <ui:FilterDataTable.Filters>
+                          <scg:List x:TypeArguments="ui:FilterOperationArgument" Capacity="4">
+                            <ui:FilterOperationArgument BooleanOperator="And" Operator="EQ">
+                              <ui:FilterOperationArgument.Column>
+                                <InArgument x:TypeArguments="x:Int32">[25]</InArgument>
+                              </ui:FilterOperationArgument.Column>
+                              <ui:FilterOperationArgument.Operand>
+                                <InArgument x:TypeArguments="x:String">["COMPLETE"]</InArgument>
+                              </ui:FilterOperationArgument.Operand>
+                            </ui:FilterOperationArgument>
+                          </scg:List>
+                        </ui:FilterDataTable.Filters>
+                        <ui:FilterDataTable.SelectColumns>
+                          <scg:List x:TypeArguments="InArgument" Capacity="4">
+                            <x:Null />
+                          </scg:List>
+                        </ui:FilterDataTable.SelectColumns>
+                      </ui:FilterDataTable>
+                      <ui:ExecuteQuery ContinueOnError="{x:Null}" ExistingDbConnection="{x:Null}" TimeoutMS="{x:Null}" CommandType="Text" DataTable="[dt_Result]" DisplayName="Execute Query" sap:VirtualizedContainerService.HintSize="334,88" sap2010:WorkflowViewState.IdRef="ExecuteQuery_14" ProviderName="System.Data.Odbc" Sql="DELETE FROM RPALIB.PRTEMP" ConnectionString="Dsn=WAVEDLIB">
+                        <ui:ExecuteQuery.Parameters>
+                          <scg:Dictionary x:TypeArguments="x:String, Argument" />
+                        </ui:ExecuteQuery.Parameters>
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                      </ui:ExecuteQuery>
+                      <ui:ForEachRow CurrentIndex="{x:Null}" DataTable="[dt_PROlder]" DisplayName="For Each Row" sap:VirtualizedContainerService.HintSize="334,51" sap2010:WorkflowViewState.IdRef="ForEachRow_2">
+                        <ui:ForEachRow.Body>
+                          <ActivityAction x:TypeArguments="sd:DataRow">
+                            <ActivityAction.Argument>
+                              <DelegateInArgument x:TypeArguments="sd:DataRow" Name="row" />
+                            </ActivityAction.Argument>
+                            <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="480,407" sap2010:WorkflowViewState.IdRef="Sequence_275">
+                              <sap:WorkflowViewStateService.ViewState>
+                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                </scg:Dictionary>
+                              </sap:WorkflowViewStateService.ViewState>
+                              <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="438,315" sap2010:WorkflowViewState.IdRef="TryCatch_1">
+                                <TryCatch.Try>
+                                  <ui:ExecuteQuery ContinueOnError="{x:Null}" ExistingDbConnection="{x:Null}" TimeoutMS="{x:Null}" CommandType="Text" DataTable="[dt_Result]" DisplayName="Execute Query" sap:VirtualizedContainerService.HintSize="334,88" sap2010:WorkflowViewState.IdRef="ExecuteQuery_13" ProviderName="System.Data.Odbc" Sql="[&quot;INSERT INTO RPALIB.PRTEMP VALUES ('&quot;+row(0).ToString+&quot;')&quot;]" ConnectionString="Dsn=WAVEDLIB">
+                                    <ui:ExecuteQuery.Parameters>
+                                      <scg:Dictionary x:TypeArguments="x:String, Argument" />
+                                    </ui:ExecuteQuery.Parameters>
+                                    <sap:WorkflowViewStateService.ViewState>
+                                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                      </scg:Dictionary>
+                                    </sap:WorkflowViewStateService.ViewState>
+                                  </ui:ExecuteQuery>
+                                </TryCatch.Try>
+                                <TryCatch.Catches>
+                                  <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="404,21" sap2010:WorkflowViewState.IdRef="Catch`1_1">
+                                    <sap:WorkflowViewStateService.ViewState>
+                                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                        <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                      </scg:Dictionary>
+                                    </sap:WorkflowViewStateService.ViewState>
+                                    <ActivityAction x:TypeArguments="s:Exception">
+                                      <ActivityAction.Argument>
+                                        <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
+                                      </ActivityAction.Argument>
+                                    </ActivityAction>
+                                  </Catch>
+                                </TryCatch.Catches>
+                              </TryCatch>
+                            </Sequence>
+                          </ActivityAction>
+                        </ui:ForEachRow.Body>
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                      </ui:ForEachRow>
+                      <ui:ExcelWriteCell Cell="[&quot;A3:Z&quot;+grLastRow.ToString]" DisplayName="Write Cell" sap:VirtualizedContainerService.HintSize="334,87" sap2010:WorkflowViewState.IdRef="ExcelWriteCell_32" SheetName="REMAIND PR">
+                        <ui:ExcelWriteCell.Text>
+                          <InArgument x:TypeArguments="x:String">
+                            <Literal x:TypeArguments="x:String" Value="" />
+                          </InArgument>
+                        </ui:ExcelWriteCell.Text>
+                      </ui:ExcelWriteCell>
+                      <ui:ExecuteQuery ContinueOnError="{x:Null}" ExistingDbConnection="{x:Null}" TimeoutMS="{x:Null}" CommandType="Text" DataTable="[dt_Result]" DisplayName="Execute Query" sap:VirtualizedContainerService.HintSize="334,88" sap2010:WorkflowViewState.IdRef="ExecuteQuery_4" ProviderName="System.Data.Odbc" Sql="SELECT PR,LINE1,LINE2,ITEM,ITEMNAME,START_DATE,EST_FINISH,QTY,TIME,UN_QTY,M_STATUS,'','','','','','','','','','','','','',TYPE,EXIST&#x9;&#x9;&#xA;FROM (SELECT F1.*,&#x9;&#x9;&#xA;CASE WHEN F2.PSHN9D='' THEN F2.PSCN9D &#x9;&#x9;&#xA;ELSE F2.PSHN9D END AS PR2,F2.LN1C9D,F2.PCPU9D,&#x9;&#x9;&#xA;CASE WHEN F1.PCPU &gt; 0 THEN 'COMP'&#x9;&#x9;&#xA;ELSE CASE&#x9;&#x9;&#xA;WHEN TRZ12.COMFRZ IS NULL AND TRZ11.COMFRZ IS NULL AND F2.PSCN9D IS NULL THEN 'NO PR/BOX'&#x9;&#x9;&#xA;WHEN TRZ12.COMFRZ = '1' THEN 'OK'&#x9;&#x9;&#xA;WHEN TRZ11.COMFRZ= '0' THEN 'W-AWH'&#x9;&#x9;&#xA;WHEN F2.PCPU9D &gt; 0 THEN 'OTHER'&#x9;&#x9;&#xA;ELSE 'NOT YET' END&#x9;&#x9;&#xA;END AS M_STATUS, &#x9;&#x9;&#xA;CASE WHEN PDSC9G = '1' THEN 'REMAKE'&#x9;&#x9;&#xA;WHEN LINE2 IN ('51','52') THEN 'SAMPLE'&#x9;&#x9;&#xA;WHEN F1.EPFU9D &lt; YEAR(NOW())*10000+MONTH(NOW())*100+DAY(NOW()) THEN 'DELAY'&#x9;&#x9;&#xA;ELSE 'NORMAL' END AS TYPE,&#x9;&#x9;&#xA;CASE WHEN F1.PCPU &gt; 0 THEN 'COMPLETE'&#x9;&#x9;&#xA;ELSE '' END AS EXIST,&#x9;&#x9;&#xA;ROW_NUMBER() OVER (PARTITION BY PR,F1.MATERIAL_STATUS ORDER BY F2.PCPU9D) STT_TPR&#x9;&#x9;&#xA;FROM&#x9;&#x9;&#xA;(SELECT PSCN9D PP,PSHN9D AS PR, LN1C9D AS LINE1, LN2C9D AS LINE2, ITMC9D AS ITEM, IT1IA0 AS ITEMNAME, SUBSTR(PSDU9D,5,2)||'/'||RIGHT(PSDU9D,2)||'/'||LEFT(PSDU9D,4) AS START_DATE, SUBSTR(EPFU9D,5,2)||'/'||RIGHT(EPFU9D,2)||'/'||LEFT(EPFU9D,4) AS EST_FINISH, PSCQ9D AS QTY, EPFC9D AS TIME,  SUM(MCUQW1) AS UN_QTY,&#x9;&#x9;&#xA;CASE&#x9;&#x9;&#xA;WHEN SUM(MCUQW1) &gt; 0 THEN 'NOT YET'&#x9;&#x9;&#xA;ELSE CASE &#x9;&#x9;&#xA;WHEN STSCW1 IS NULL THEN 'NOT UPDATE 20-36'&#x9;&#x9;&#xA;WHEN STSCW1='OK' THEN 'OK'&#x9;&#x9;&#xA;ELSE 'W-AWH' &#x9;&#x9;&#xA;END&#x9;&#x9;&#xA;END&#x9;AS Material_Status,PCPU9D PCPU,EPFU9D&#x9;&#xA;FROM WAVEDLIB.F9D00&#x9;&#x9;&#xA;INNER JOIN RPALIB.PRTEMP TEMP ON PSHN9D=TEMP.PR&#x9;&#x9;&#xA;LEFT JOIN WAVEDLIB.FA000 ON ITMC9D = ITMCA0&#x9;&#x9;&#xA;LEFT JOIN WAVEDLIB.F9G00 ON PSHN9D = PSHN9G&#x9;&#x9;&#xA;LEFT JOIN WAVEALIB.YOK71W1DL ON PSHN9D=PSHNW1&#x9;&#x9;&#xA;GROUP BY PSCN9D,PSHN9D,LN1C9D,LN2C9D,ITMC9D,IT1IA0,PSDU9D,EPFU9D,PSCQ9D,EPFC9D,STSCW1,PCPU9D,EPFU9D) F1&#x9;&#x9;&#xA;LEFT JOIN WAVEDLIB.F9G00 ON PR=PSHN9G&#x9;&#x9;&#xA;LEFT JOIN WAVEDLIB.F9F00 ON PP=RLTN9F AND RLTN9F&lt;&gt;PSCN9F&#x9;&#x9;&#xA;LEFT JOIN WAVEDLIB.F9D00 F2 ON PSCN9F=F2.PSCN9D&#x9;&#x9;&#xA;LEFT JOIN WAVEDLIB.TRZ50 TRZ11 ON PR=TRZ11.PSHNRZ AND TRZ11.COMFRZ&lt;&gt;'1'&#x9;&#x9;&#xA;LEFT JOIN WAVEDLIB.TRZ50 TRZ12 ON PR=TRZ12.PSHNRZ AND TRZ12.COMFRZ='1') B&#x9;&#x9;&#xA;WHERE STT_TPR=1&#x9;&#x9;&#xA;GROUP BY PR,LINE1,LINE2,ITEM,ITEMNAME,START_DATE,EST_FINISH,QTY,TIME,UN_QTY,M_STATUS,TYPE,EXIST&#x9;&#x9;" ConnectionString="Dsn=WAVEDLIB">
+                        <ui:ExecuteQuery.Parameters>
+                          <scg:Dictionary x:TypeArguments="x:String, Argument" />
+                        </ui:ExecuteQuery.Parameters>
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                      </ui:ExecuteQuery>
+                      <ui:ExcelWriteRange AddHeaders="False" DataTable="[dt_Result]" DisplayName="Write Range" sap:VirtualizedContainerService.HintSize="334,87" sap2010:WorkflowViewState.IdRef="ExcelWriteRange_3" SheetName="REMAIND PR" StartingCell="A3" />
+                      <ui:ExecuteQuery ContinueOnError="{x:Null}" ExistingDbConnection="{x:Null}" TimeoutMS="{x:Null}" CommandType="Text" DataTable="[dt_PRNew]" DisplayName="Execute Query" sap:VirtualizedContainerService.HintSize="334,88" sap2010:WorkflowViewState.IdRef="ExecuteQuery_15" ProviderName="System.Data.Odbc" Sql="SELECT PR,LINE1,LINE2,ITEM,ITEMNAME,START_DATE,EST_FINISH,QTY,TIME,UN_QTY,M_STATUS,'','','','','','','','','','','','','',TYPE,EXIST&#x9;&#x9;&#xA;FROM (SELECT F1.*,&#x9;&#x9;&#xA;CASE WHEN F2.PSHN9D='' THEN F2.PSCN9D &#x9;&#x9;&#xA;ELSE F2.PSHN9D END AS PR2,F2.LN1C9D,F2.PCPU9D,&#x9;&#x9;&#xA;CASE WHEN F1.PCPU &gt; 0 THEN 'COMP'&#x9;&#x9;&#xA;ELSE CASE&#x9;&#x9;&#xA;WHEN TRZ12.COMFRZ IS NULL AND TRZ11.COMFRZ IS NULL AND F2.PSCN9D IS NULL THEN 'NO PR/BOX'&#x9;&#x9;&#xA;WHEN TRZ12.COMFRZ = '1' THEN 'OK'&#x9;&#x9;&#xA;WHEN TRZ11.COMFRZ= '0' THEN 'W-AWH'&#x9;&#x9;&#xA;WHEN F2.PCPU9D &gt; 0 THEN 'OTHER'&#x9;&#x9;&#xA;ELSE 'NOT YET' END&#x9;&#x9;&#xA;END AS M_STATUS, &#x9;&#x9;&#xA;CASE WHEN PDSC9G = '1' THEN 'REMAKE'&#x9;&#x9;&#xA;WHEN LINE2 IN ('51','52') THEN 'SAMPLE'&#x9;&#x9;&#xA;WHEN F1.EPFU9D &lt; YEAR(NOW())*10000+MONTH(NOW())*100+DAY(NOW()) THEN 'DELAY'&#x9;&#x9;&#xA;ELSE 'NORMAL' END AS TYPE,&#x9;&#x9;&#xA;CASE WHEN F1.PCPU &gt; 0 THEN 'COMPLETE'&#x9;&#x9;&#xA;ELSE '' END AS EXIST,&#x9;&#x9;&#xA;ROW_NUMBER() OVER (PARTITION BY PR,F1.MATERIAL_STATUS ORDER BY F2.PCPU9D) STT_TPR&#x9;&#x9;&#xA;FROM&#x9;&#x9;&#xA;(SELECT PSCN9D PP,PSHN9D AS PR, LN1C9D AS LINE1, LN2C9D AS LINE2, ITMC9D AS ITEM, IT1IA0 AS ITEMNAME, SUBSTR(PSDU9D,5,2)||'/'||RIGHT(PSDU9D,2)||'/'||LEFT(PSDU9D,4) AS START_DATE, SUBSTR(EPFU9D,5,2)||'/'||RIGHT(EPFU9D,2)||'/'||LEFT(EPFU9D,4) AS EST_FINISH, PSCQ9D AS QTY, EPFC9D AS TIME,  SUM(MCUQW1) AS UN_QTY,&#x9;&#x9;&#xA;CASE&#x9;&#x9;&#xA;WHEN SUM(MCUQW1) &gt; 0 THEN 'NOT YET'&#x9;&#x9;&#xA;ELSE CASE &#x9;&#x9;&#xA;WHEN STSCW1 IS NULL THEN 'NOT UPDATE 20-36'&#x9;&#x9;&#xA;WHEN STSCW1='OK' THEN 'OK'&#x9;&#x9;&#xA;ELSE 'W-AWH' &#x9;&#x9;&#xA;END&#x9;&#x9;&#xA;END&#x9;AS Material_Status,PCPU9D PCPU,EPFU9D&#x9;&#xA;FROM WAVEDLIB.F9D00&#x9;&#x9;&#xA;LEFT JOIN WAVEDLIB.FA000 ON ITMC9D = ITMCA0&#x9;&#x9;&#xA;LEFT JOIN WAVEDLIB.F9G00 ON PSHN9D = PSHN9G&#x9;&#x9;&#xA;LEFT JOIN WAVEALIB.YOK71W1DL ON PSHN9D=PSHNW1&#x9;&#x9;&#xA;WHERE LN1C9D IN ('530','531','560','550','541','570' ) AND PCMT9D=0 AND PSHN9D LIKE 'PR%' AND PCPU9D=0&#x9;&#x9;&#xA;AND PSHN9D NOT IN (SELECT PR FROM RPALIB.PRTEMP)&#x9;&#x9;&#xA;GROUP BY PSCN9D,PSHN9D,LN1C9D,LN2C9D,ITMC9D,IT1IA0,PSDU9D,EPFU9D,PSCQ9D,EPFC9D,STSCW1,PCPU9D,EPFU9D) F1&#x9;&#x9;&#xA;LEFT JOIN WAVEDLIB.F9G00 ON PR=PSHN9G&#x9;&#x9;&#xA;LEFT JOIN WAVEDLIB.F9F00 ON PP=RLTN9F AND RLTN9F&lt;&gt;PSCN9F&#x9;&#x9;&#xA;LEFT JOIN WAVEDLIB.F9D00 F2 ON PSCN9F=F2.PSCN9D&#x9;&#x9;&#xA;LEFT JOIN WAVEDLIB.TRZ50 TRZ11 ON PR=TRZ11.PSHNRZ AND TRZ11.COMFRZ&lt;&gt;'1'&#x9;&#x9;&#xA;LEFT JOIN WAVEDLIB.TRZ50 TRZ12 ON PR=TRZ12.PSHNRZ AND TRZ12.COMFRZ='1') B&#x9;&#x9;&#xA;WHERE STT_TPR=1&#x9;&#x9;&#xA;GROUP BY PR,LINE1,LINE2,ITEM,ITEMNAME,START_DATE,EST_FINISH,QTY,TIME,UN_QTY,M_STATUS,TYPE,EXIST&#x9;&#x9;" ConnectionString="Dsn=WAVEDLIB">
+                        <ui:ExecuteQuery.Parameters>
+                          <scg:Dictionary x:TypeArguments="x:String, Argument" />
+                        </ui:ExecuteQuery.Parameters>
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                      </ui:ExecuteQuery>
+                      <Assign sap:VirtualizedContainerService.HintSize="334,60" sap2010:WorkflowViewState.IdRef="Assign_268">
+                        <Assign.To>
+                          <OutArgument x:TypeArguments="x:Object">[grLastRow]</OutArgument>
+                        </Assign.To>
+                        <Assign.Value>
+                          <InArgument x:TypeArguments="x:Object">[dt_Result.Rows.Count+2]</InArgument>
+                        </Assign.Value>
+                      </Assign>
+                      <ui:ExcelWriteCell Cell="[&quot;A&quot;+  (Int32.Parse(grLastRow.ToString)+1).ToString]" DisplayName="Write Cell" sap:VirtualizedContainerService.HintSize="334,87" sap2010:WorkflowViewState.IdRef="ExcelWriteCell_33" SheetName="REMAIND PR" Text="TEST" />
+                    </Sequence>
+                  </If.Then>
+                  <If.Else>
+                    <Sequence sap:VirtualizedContainerService.HintSize="376,280" sap2010:WorkflowViewState.IdRef="Sequence_265">
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                      <ui:ExecuteQuery ContinueOnError="{x:Null}" ExistingDbConnection="{x:Null}" TimeoutMS="{x:Null}" CommandType="Text" DataTable="[dt_PRNew]" DisplayName="Execute Query" sap:VirtualizedContainerService.HintSize="334,88" sap2010:WorkflowViewState.IdRef="ExecuteQuery_9" ProviderName="System.Data.Odbc" Sql="SELECT PR,LINE1,LINE2,ITEM,ITEMNAME,START_DATE,EST_FINISH,QTY,TIME,UN_QTY,M_STATUS,'','','','','','','','','','','','','',TYPE,EXIST&#x9;&#x9;&#xA;FROM (SELECT F1.*,&#x9;&#x9;&#xA;CASE WHEN F2.PSHN9D='' THEN F2.PSCN9D &#x9;&#x9;&#xA;ELSE F2.PSHN9D END AS PR2,F2.LN1C9D,F2.PCPU9D,&#x9;&#x9;&#xA;CASE WHEN F1.PCPU &gt; 0 THEN 'COMP'&#x9;&#x9;&#xA;ELSE CASE&#x9;&#x9;&#xA;WHEN TRZ12.COMFRZ IS NULL AND TRZ11.COMFRZ IS NULL AND F2.PSCN9D IS NULL THEN 'NO PR/BOX'&#x9;&#x9;&#xA;WHEN TRZ12.COMFRZ = '1' THEN 'OK'&#x9;&#x9;&#xA;WHEN TRZ11.COMFRZ= '0' THEN 'W-AWH'&#x9;&#x9;&#xA;WHEN F2.PCPU9D &gt; 0 THEN 'OTHER'&#x9;&#x9;&#xA;ELSE 'NOT YET' END&#x9;&#x9;&#xA;END AS M_STATUS, &#x9;&#x9;&#xA;CASE WHEN PDSC9G = '1' THEN 'REMAKE'&#x9;&#x9;&#xA;WHEN LINE2 IN ('51','52') THEN 'SAMPLE'&#x9;&#x9;&#xA;WHEN F1.EPFU9D &lt; YEAR(NOW())*10000+MONTH(NOW())*100+DAY(NOW()) THEN 'DELAY'&#x9;&#x9;&#xA;ELSE 'NORMAL' END AS TYPE,&#x9;&#x9;&#xA;CASE WHEN F1.PCPU &gt; 0 THEN 'COMPLETE'&#x9;&#x9;&#xA;ELSE '' END AS EXIST,&#x9;&#x9;&#xA;ROW_NUMBER() OVER (PARTITION BY PR,F1.MATERIAL_STATUS ORDER BY F2.PCPU9D) STT_TPR&#x9;&#x9;&#xA;FROM&#x9;&#x9;&#xA;(SELECT PSCN9D PP,PSHN9D AS PR, LN1C9D AS LINE1, LN2C9D AS LINE2, ITMC9D AS ITEM, IT1IA0 AS ITEMNAME, SUBSTR(PSDU9D,5,2)||'/'||RIGHT(PSDU9D,2)||'/'||LEFT(PSDU9D,4) AS START_DATE, SUBSTR(EPFU9D,5,2)||'/'||RIGHT(EPFU9D,2)||'/'||LEFT(EPFU9D,4) AS EST_FINISH, PSCQ9D AS QTY, EPFC9D AS TIME,  SUM(MCUQW1) AS UN_QTY,&#x9;&#x9;&#xA;CASE&#x9;&#x9;&#xA;WHEN SUM(MCUQW1) &gt; 0 THEN 'NOT YET'&#x9;&#x9;&#xA;ELSE CASE &#x9;&#x9;&#xA;WHEN STSCW1 IS NULL THEN 'NOT UPDATE 20-36'&#x9;&#x9;&#xA;WHEN STSCW1='OK' THEN 'OK'&#x9;&#x9;&#xA;ELSE 'W-AWH' &#x9;&#x9;&#xA;END&#x9;&#x9;&#xA;END&#x9;AS Material_Status,PCPU9D PCPU,EPFU9D&#x9;&#xA;FROM WAVEDLIB.F9D00&#x9;&#x9;&#xA;LEFT JOIN WAVEDLIB.FA000 ON ITMC9D = ITMCA0&#x9;&#x9;&#xA;LEFT JOIN WAVEDLIB.F9G00 ON PSHN9D = PSHN9G&#x9;&#x9;&#xA;LEFT JOIN WAVEALIB.YOK71W1DL ON PSHN9D=PSHNW1&#x9;&#x9;&#xA;WHERE LN1C9D IN ('530','531','560','550','541','570' ) AND PCMT9D=0 AND PSHN9D LIKE 'PR%' AND PCPU9D=0&#x9;&#x9;&#xA;AND PSHN9D NOT IN (SELECT PR FROM RPALIB.PRTEMP)&#x9;&#x9;&#xA;GROUP BY PSCN9D,PSHN9D,LN1C9D,LN2C9D,ITMC9D,IT1IA0,PSDU9D,EPFU9D,PSCQ9D,EPFC9D,STSCW1,PCPU9D,EPFU9D) F1&#x9;&#x9;&#xA;LEFT JOIN WAVEDLIB.F9G00 ON PR=PSHN9G&#x9;&#x9;&#xA;LEFT JOIN WAVEDLIB.F9F00 ON PP=RLTN9F AND RLTN9F&lt;&gt;PSCN9F&#x9;&#x9;&#xA;LEFT JOIN WAVEDLIB.F9D00 F2 ON PSCN9F=F2.PSCN9D&#x9;&#x9;&#xA;LEFT JOIN WAVEDLIB.TRZ50 TRZ11 ON PR=TRZ11.PSHNRZ AND TRZ11.COMFRZ&lt;&gt;'1'&#x9;&#x9;&#xA;LEFT JOIN WAVEDLIB.TRZ50 TRZ12 ON PR=TRZ12.PSHNRZ AND TRZ12.COMFRZ='1') B&#x9;&#x9;&#xA;WHERE STT_TPR=1&#x9;&#x9;&#xA;GROUP BY PR,LINE1,LINE2,ITEM,ITEMNAME,START_DATE,EST_FINISH,QTY,TIME,UN_QTY,M_STATUS,TYPE,EXIST&#x9;&#x9;" ConnectionString="Dsn=WAVEDLIB">
+                        <ui:ExecuteQuery.Parameters>
+                          <scg:Dictionary x:TypeArguments="x:String, Argument" />
+                        </ui:ExecuteQuery.Parameters>
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                      </ui:ExecuteQuery>
+                      <Assign sap:VirtualizedContainerService.HintSize="334,60" sap2010:WorkflowViewState.IdRef="Assign_262">
+                        <Assign.To>
+                          <OutArgument x:TypeArguments="x:Object">[grLastRow]</OutArgument>
+                        </Assign.To>
+                        <Assign.Value>
+                          <InArgument x:TypeArguments="x:Object">[2]</InArgument>
+                        </Assign.Value>
+                      </Assign>
+                    </Sequence>
+                  </If.Else>
+                </If>
+                <ui:ExcelWriteRange AddHeaders="False" DataTable="[dt_PRNew]" DisplayName="Write Range" sap:VirtualizedContainerService.HintSize="2946,87" sap2010:WorkflowViewState.IdRef="ExcelWriteRange_1" SheetName="REMAIND PR" StartingCell="[&quot;A&quot;+  (Int32.Parse(grLastRow.ToString)+1).ToString]" />
+                <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="2946,51" sap2010:WorkflowViewState.IdRef="CommentOut_3">
+                  <ui:CommentOut.Body>
+                    <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="382,335" sap2010:WorkflowViewState.IdRef="Sequence_278">
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                      <ee:MoveVerticalActivity MoveColumn="{x:Null}" MoveCount="{x:Null}" BaseCell="A10000" ClipboardCopyFlg="False" CurrentCell="[stCellAddress]" DisplayName="Move To Lat Row" sap:VirtualizedContainerService.HintSize="340,144" sap2010:WorkflowViewState.IdRef="MoveVerticalActivity_4" MoveDirection="Up" MoveLastDataRowFlg="True" MoveNextFlg="False" SheetName="REMAIND PR" WorkBook="[wbInput]">
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                      </ee:MoveVerticalActivity>
+                      <Assign sap:VirtualizedContainerService.HintSize="340,60" sap2010:WorkflowViewState.IdRef="Assign_264">
+                        <Assign.To>
+                          <OutArgument x:TypeArguments="x:Object">[grLastRow]</OutArgument>
+                        </Assign.To>
+                        <Assign.Value>
+                          <InArgument x:TypeArguments="x:Object">[stCellAddress.Remove(0,1)]</InArgument>
+                        </Assign.Value>
+                      </Assign>
+                    </Sequence>
+                  </ui:CommentOut.Body>
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                      <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                </ui:CommentOut>
+                <ui:ExcelReadRange AddHeaders="False" DataTable="[dt_Result]" DisplayName="Read Range" sap:VirtualizedContainerService.HintSize="2946,59" sap2010:WorkflowViewState.IdRef="ExcelReadRange_1" Range="A3" SheetName="REMAIND PR">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                </ui:ExcelReadRange>
+                <Assign sap:VirtualizedContainerService.HintSize="2946,60" sap2010:WorkflowViewState.IdRef="Assign_265">
+                  <Assign.To>
+                    <OutArgument x:TypeArguments="x:Int32">[currentRow]</OutArgument>
+                  </Assign.To>
+                  <Assign.Value>
+                    <InArgument x:TypeArguments="x:Int32">3</InArgument>
+                  </Assign.Value>
+                </Assign>
+                <ui:ForEachRow CurrentIndex="{x:Null}" DataTable="[dt_Result]" DisplayName="For Each Row" sap:VirtualizedContainerService.HintSize="2946,5926" sap2010:WorkflowViewState.IdRef="ForEachRow_1">
+                  <ui:ForEachRow.Body>
+                    <ActivityAction x:TypeArguments="sd:DataRow">
+                      <ActivityAction.Argument>
+                        <DelegateInArgument x:TypeArguments="sd:DataRow" Name="row" />
+                      </ActivityAction.Argument>
+                      <Sequence sap:VirtualizedContainerService.HintSize="2896,5779" sap2010:WorkflowViewState.IdRef="Sequence_257">
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                        <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="2854,51" sap2010:WorkflowViewState.IdRef="CommentOut_4">
+                          <ui:CommentOut.Body>
+                            <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="460,412" sap2010:WorkflowViewState.IdRef="Sequence_279">
+                              <sap:WorkflowViewStateService.ViewState>
+                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                </scg:Dictionary>
+                              </sap:WorkflowViewStateService.ViewState>
+                              <Sequence DisplayName="CHECK PR STATUS" sap:VirtualizedContainerService.HintSize="334,66" sap2010:WorkflowViewState.IdRef="Sequence_252">
+                                <sap:WorkflowViewStateService.ViewState>
+                                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                    <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                                    <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                  </scg:Dictionary>
+                                </sap:WorkflowViewStateService.ViewState>
+                                <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="376,180" sap2010:WorkflowViewState.IdRef="Sequence_251">
+                                  <sap:WorkflowViewStateService.ViewState>
+                                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                    </scg:Dictionary>
+                                  </sap:WorkflowViewStateService.ViewState>
+                                  <ui:ExecuteQuery ContinueOnError="{x:Null}" ExistingDbConnection="{x:Null}" TimeoutMS="{x:Null}" CommandType="Text" DataTable="[dt_PRStatus]" DisplayName="Execute Query" sap:VirtualizedContainerService.HintSize="334,88" sap2010:WorkflowViewState.IdRef="ExecuteQuery_5" ProviderName="System.Data.Odbc" Sql="[&quot;SELECT F1.PSCN9D,F1.PSHN9D,F1.EPFU9D,F1.PCPU9D,F1.LN1C9D,F1.LN2C9D,F1.ITMC9D, TRZ11.COMFRZ B_N,TRZ12.COMFRZ B_C, F2.PSCN9D, CASE WHEN F2.PSHN9D='' THEN F2.PSCN9D   ELSE F2.PSHN9D END AS PR,F2.LN1C9D,F2.PCPU9D,  CASE WHEN F1.PCPU9D &gt; 0 THEN 'COMP'  ELSE CASE  WHEN TRZ12.COMFRZ = '1' THEN 'OTHER'  WHEN TRZ11.COMFRZ= '0' THEN 'W-AWH'  WHEN F2.PCPU9D &gt; 0 THEN 'OTHER'  ELSE 'NOT YET' END  END AS M_STATUS,   CASE WHEN PDSC9G = '1' THEN 'REMAKE'  WHEN F1.LN2C9D IN ('51','52') THEN 'SAMPLE'  WHEN F1.EPFU9D &lt; YEAR(NOW())*10000+MONTH(NOW())*100+DAY(NOW()) THEN 'DELAY'  ELSE 'NORMAL' END AS TYPE,  CASE WHEN F1.PCPU9D &gt; 0 THEN 'COMPLETE'  ELSE '' END AS EXIST  FROM WAVEDLIB.F9D00 F1  LEFT JOIN WAVEDLIB.F9G00 ON F1.PSHN9D=PSHN9G  LEFT JOIN WAVEDLIB.F9F00 ON F1.PSCN9D=RLTN9F AND RLTN9F&lt;&gt;PSCN9F  LEFT JOIN WAVEDLIB.F9D00 F2 ON PSCN9F=F2.PSCN9D  LEFT JOIN WAVEDLIB.TRZ50 TRZ11 ON F1.PSHN9D=TRZ11.PSHNRZ AND TRZ11.COMFRZ&lt;&gt;'1'  LEFT JOIN WAVEDLIB.TRZ50 TRZ12 ON F1.PSHN9D=TRZ12.PSHNRZ AND TRZ12.COMFRZ='1'  WHERE F1.PSHN9D='&quot;+row(0).ToString+&quot;'  GROUP BY F1.PSCN9D,F1.PSHN9D,F1.EPFU9D,F1.PCPU9D,F1.LN1C9D,F1.LN2C9D,F1.ITMC9D,TRZ11.COMFRZ,TRZ12.COMFRZ,F2.PSCN9D,F2.PSHN9D,F2.PCPU9D,F2.LN1C9D,PDSC9G  ORDER BY F2.PCPU9D &quot;]" ConnectionString="Dsn=WAVEDLIB">
+                                    <ui:ExecuteQuery.Parameters>
+                                      <scg:Dictionary x:TypeArguments="x:String, Argument" />
+                                    </ui:ExecuteQuery.Parameters>
+                                    <sap:WorkflowViewStateService.ViewState>
+                                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                      </scg:Dictionary>
+                                    </sap:WorkflowViewStateService.ViewState>
+                                  </ui:ExecuteQuery>
+                                </Sequence>
+                                <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="376,222" sap2010:WorkflowViewState.IdRef="MultipleAssign_2">
+                                  <ui:MultipleAssign.AssignOperations>
+                                    <scg:List x:TypeArguments="ui:AssignOperation" Capacity="8">
+                                      <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_6">
+                                        <ui:AssignOperation.To>
+                                          <OutArgument x:TypeArguments="x:String">[stPR]</OutArgument>
+                                        </ui:AssignOperation.To>
+                                        <ui:AssignOperation.Value>
+                                          <InArgument x:TypeArguments="x:String">[dt_PRStatus.Rows(0)(10).ToString]</InArgument>
+                                        </ui:AssignOperation.Value>
+                                      </ui:AssignOperation>
+                                      <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_7">
+                                        <ui:AssignOperation.To>
+                                          <OutArgument x:TypeArguments="x:String">[stLine]</OutArgument>
+                                        </ui:AssignOperation.To>
+                                        <ui:AssignOperation.Value>
+                                          <InArgument x:TypeArguments="x:String">[dt_PRStatus.Rows(0)(11).ToString]</InArgument>
+                                        </ui:AssignOperation.Value>
+                                      </ui:AssignOperation>
+                                      <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_8">
+                                        <ui:AssignOperation.To>
+                                          <OutArgument x:TypeArguments="x:String">[stStatus]</OutArgument>
+                                        </ui:AssignOperation.To>
+                                        <ui:AssignOperation.Value>
+                                          <InArgument x:TypeArguments="x:String">[dt_PRStatus.Rows(0)(13).ToString]</InArgument>
+                                        </ui:AssignOperation.Value>
+                                      </ui:AssignOperation>
+                                      <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_9">
+                                        <ui:AssignOperation.To>
+                                          <OutArgument x:TypeArguments="x:String">[stType]</OutArgument>
+                                        </ui:AssignOperation.To>
+                                        <ui:AssignOperation.Value>
+                                          <InArgument x:TypeArguments="x:String">[dt_PRStatus.Rows(0)(14).ToString]</InArgument>
+                                        </ui:AssignOperation.Value>
+                                      </ui:AssignOperation>
+                                      <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_10">
+                                        <ui:AssignOperation.To>
+                                          <OutArgument x:TypeArguments="x:String">[stExist]</OutArgument>
+                                        </ui:AssignOperation.To>
+                                        <ui:AssignOperation.Value>
+                                          <InArgument x:TypeArguments="x:String">[dt_PRStatus.Rows(0)(15).ToString]</InArgument>
+                                        </ui:AssignOperation.Value>
+                                      </ui:AssignOperation>
+                                    </scg:List>
+                                  </ui:MultipleAssign.AssignOperations>
+                                </ui:MultipleAssign>
+                              </Sequence>
+                              <ui:ExcelWriteCell Cell="[&quot;K&quot;+currentRow.ToString]" DisplayName="Write Cell" sap:VirtualizedContainerService.HintSize="334,87" sap2010:WorkflowViewState.IdRef="ExcelWriteCell_29" SheetName="REMAIND PR" Text="[stStatus]" />
+                              <ui:ExcelWriteCell Cell="[&quot;Y&quot;+currentRow.ToString]" DisplayName="Write Cell" sap:VirtualizedContainerService.HintSize="334,87" sap2010:WorkflowViewState.IdRef="ExcelWriteCell_1" SheetName="REMAIND PR" Text="[stType]" />
+                            </Sequence>
+                          </ui:CommentOut.Body>
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                        </ui:CommentOut>
+                        <If Condition="[row(10).ToString=&quot;NOT YET&quot;]" sap:VirtualizedContainerService.HintSize="2854,5496" sap2010:WorkflowViewState.IdRef="If_60">
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                          <If.Then>
+                            <Sequence sap:VirtualizedContainerService.HintSize="2709,5349" sap2010:WorkflowViewState.IdRef="Sequence_281">
+                              <sap:WorkflowViewStateService.ViewState>
+                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                </scg:Dictionary>
+                              </sap:WorkflowViewStateService.ViewState>
+                              <Sequence sap:VirtualizedContainerService.HintSize="2667,5257" sap2010:WorkflowViewState.IdRef="Sequence_268">
+                                <sap:WorkflowViewStateService.ViewState>
+                                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                    <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                  </scg:Dictionary>
+                                </sap:WorkflowViewStateService.ViewState>
+                                <Sequence DisplayName="CHECK PR1" sap:VirtualizedContainerService.HintSize="2625,380" sap2010:WorkflowViewState.IdRef="Sequence_280">
+                                  <sap:WorkflowViewStateService.ViewState>
+                                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                      <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                    </scg:Dictionary>
+                                  </sap:WorkflowViewStateService.ViewState>
+                                  <ui:ExecuteQuery ContinueOnError="{x:Null}" ExistingDbConnection="{x:Null}" TimeoutMS="{x:Null}" CommandType="Text" DataTable="[dt_PRStatus]" DisplayName="Execute Query" sap:VirtualizedContainerService.HintSize="338,88" sap2010:WorkflowViewState.IdRef="ExecuteQuery_16" ProviderName="System.Data.Odbc" Sql="[&quot;SELECT F1.PSCN9D,F1.PSHN9D,F1.EPFU9D,F1.PCPU9D,F1.LN1C9D,F1.LN2C9D,F1.ITMC9D, TRZ11.COMFRZ B_N,TRZ12.COMFRZ B_C, F2.PSCN9D, CASE WHEN F2.PSHN9D='' THEN F2.PSCN9D  ELSE F2.PSHN9D END AS PR,F2.LN1C9D,F2.PCPU9D, CASE WHEN F1.PCPU9D &gt; 0 THEN 'COMP' ELSE CASE WHEN F1.LN1C9D IN ('510','511') THEN 'OK' WHEN TRZ12.COMFRZ IS NULL AND TRZ11.COMFRZ IS NULL AND F2.PSCN9D IS NULL THEN 'NO PR/BOX' WHEN TRZ12.COMFRZ = '1' THEN 'OK' WHEN TRZ11.COMFRZ= '0' THEN 'W-AWH' WHEN F2.PCPU9D &gt; 0 THEN 'OTHER' ELSE 'NOT YET' END END AS M_STATUS,  CASE WHEN PDSC9G = '1' THEN 'REMAKE' WHEN F1.LN2C9D IN ('51','52') THEN 'SAMPLE' WHEN F1.EPFU9D &lt; YEAR(NOW())*10000+MONTH(NOW())*100+DAY(NOW()) THEN 'DELAY' ELSE 'NORMAL' END AS TYPE, CASE WHEN F1.PCPU9D &gt; 0 THEN 'COMPLETE' ELSE '' END AS EXIST FROM WAVEDLIB.F9D00 F1 LEFT JOIN WAVEDLIB.F9G00 ON F1.PSHN9D=PSHN9G LEFT JOIN WAVEDLIB.F9F00 ON F1.PSCN9D=RLTN9F AND RLTN9F&lt;&gt;PSCN9F LEFT JOIN WAVEDLIB.F9D00 F2 ON PSCN9F=F2.PSCN9D LEFT JOIN WAVEDLIB.TRZ50 TRZ11 ON F1.PSHN9D=TRZ11.PSHNRZ AND TRZ11.COMFRZ&lt;&gt;'1' LEFT JOIN WAVEDLIB.TRZ50 TRZ12 ON F1.PSHN9D=TRZ12.PSHNRZ AND TRZ12.COMFRZ='1' WHERE F1.PSHN9D='&quot;+ row(0).ToString+&quot;' GROUP BY F1.PSCN9D,F1.PSHN9D,F1.EPFU9D,F1.PCPU9D,F1.LN1C9D,F1.LN2C9D,F1.ITMC9D,TRZ11.COMFRZ,TRZ12.COMFRZ,F2.PSCN9D,F2.PSHN9D,F2.PCPU9D,F2.LN1C9D,PDSC9G ORDER BY F2.PCPU9D&quot;]" ConnectionString="Dsn=WAVEDLIB">
+                                    <ui:ExecuteQuery.Parameters>
+                                      <scg:Dictionary x:TypeArguments="x:String, Argument" />
+                                    </ui:ExecuteQuery.Parameters>
+                                    <sap:WorkflowViewStateService.ViewState>
+                                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                      </scg:Dictionary>
+                                    </sap:WorkflowViewStateService.ViewState>
+                                  </ui:ExecuteQuery>
+                                  <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="338,160" sap2010:WorkflowViewState.IdRef="MultipleAssign_9">
+                                    <ui:MultipleAssign.AssignOperations>
+                                      <scg:List x:TypeArguments="ui:AssignOperation" Capacity="8">
+                                        <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_31">
+                                          <ui:AssignOperation.To>
+                                            <OutArgument x:TypeArguments="x:String">[stPR]</OutArgument>
+                                          </ui:AssignOperation.To>
+                                          <ui:AssignOperation.Value>
+                                            <InArgument x:TypeArguments="x:String">[dt_PRStatus.Rows(0)(10).ToString]</InArgument>
+                                          </ui:AssignOperation.Value>
+                                        </ui:AssignOperation>
+                                        <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_32">
+                                          <ui:AssignOperation.To>
+                                            <OutArgument x:TypeArguments="x:String">[stLine]</OutArgument>
+                                          </ui:AssignOperation.To>
+                                          <ui:AssignOperation.Value>
+                                            <InArgument x:TypeArguments="x:String">[dt_PRStatus.Rows(0)(11).ToString]</InArgument>
+                                          </ui:AssignOperation.Value>
+                                        </ui:AssignOperation>
+                                        <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_33">
+                                          <ui:AssignOperation.To>
+                                            <OutArgument x:TypeArguments="x:String">[stStatus]</OutArgument>
+                                          </ui:AssignOperation.To>
+                                          <ui:AssignOperation.Value>
+                                            <InArgument x:TypeArguments="x:String">[dt_PRStatus.Rows(0)(13).ToString]</InArgument>
+                                          </ui:AssignOperation.Value>
+                                        </ui:AssignOperation>
+                                      </scg:List>
+                                    </ui:MultipleAssign.AssignOperations>
+                                  </ui:MultipleAssign>
+                                </Sequence>
+                                <Sequence DisplayName="WAITING SECTION 1" sap:VirtualizedContainerService.HintSize="2625,306" sap2010:WorkflowViewState.IdRef="Sequence_253">
+                                  <sap:WorkflowViewStateService.ViewState>
+                                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                      <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                    </scg:Dictionary>
+                                  </sap:WorkflowViewStateService.ViewState>
+                                  <ui:ExcelWriteCell Cell="[&quot;M&quot;+currentRow.ToString]" DisplayName="Write Cell" sap:VirtualizedContainerService.HintSize="334,87" sap2010:WorkflowViewState.IdRef="ExcelWriteCell_3" SheetName="REMAIND PR" Text="[stPR]" />
+                                  <ui:ExcelWriteCell Cell="[&quot;N&quot;+currentRow.ToString]" DisplayName="Write Cell" sap:VirtualizedContainerService.HintSize="334,87" sap2010:WorkflowViewState.IdRef="ExcelWriteCell_4" SheetName="REMAIND PR" Text="[stLine]" />
+                                </Sequence>
+                                <If Condition="[stPR.Contains(&quot;PR&quot;)]" sap:VirtualizedContainerService.HintSize="2625,4399" sap2010:WorkflowViewState.IdRef="If_65">
+                                  <If.Then>
+                                    <Sequence sap:VirtualizedContainerService.HintSize="2246,4252" sap2010:WorkflowViewState.IdRef="Sequence_274">
+                                      <sap:WorkflowViewStateService.ViewState>
+                                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                        </scg:Dictionary>
+                                      </sap:WorkflowViewStateService.ViewState>
+                                      <Sequence DisplayName="CHECK PR1" sap:VirtualizedContainerService.HintSize="2204,507" sap2010:WorkflowViewState.IdRef="Sequence_269">
+                                        <sap:WorkflowViewStateService.ViewState>
+                                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                          </scg:Dictionary>
+                                        </sap:WorkflowViewStateService.ViewState>
+                                        <ui:ExecuteQuery ContinueOnError="{x:Null}" ExistingDbConnection="{x:Null}" TimeoutMS="{x:Null}" CommandType="Text" DataTable="[dt_PRStatus]" DisplayName="Execute Query" sap:VirtualizedContainerService.HintSize="338,88" sap2010:WorkflowViewState.IdRef="ExecuteQuery_6" ProviderName="System.Data.Odbc" Sql="[&quot;SELECT F1.PSCN9D,F1.PSHN9D,F1.EPFU9D,F1.PCPU9D,F1.LN1C9D,F1.LN2C9D,F1.ITMC9D, TRZ11.COMFRZ B_N,TRZ12.COMFRZ B_C, F2.PSCN9D, CASE WHEN F2.PSHN9D='' THEN F2.PSCN9D  ELSE F2.PSHN9D END AS PR,F2.LN1C9D,F2.PCPU9D, CASE WHEN F1.PCPU9D &gt; 0 THEN 'COMP' ELSE CASE WHEN F1.LN1C9D IN ('510','511') THEN 'OK' WHEN TRZ12.COMFRZ IS NULL AND TRZ11.COMFRZ IS NULL AND F2.PSCN9D IS NULL THEN 'NO PR/BOX' WHEN TRZ12.COMFRZ = '1' THEN 'OK' WHEN TRZ11.COMFRZ= '0' THEN 'W-AWH' WHEN F2.PCPU9D &gt; 0 THEN 'OTHER' ELSE 'NOT YET' END END AS M_STATUS,  CASE WHEN PDSC9G = '1' THEN 'REMAKE' WHEN F1.LN2C9D IN ('51','52') THEN 'SAMPLE' WHEN F1.EPFU9D &lt; YEAR(NOW())*10000+MONTH(NOW())*100+DAY(NOW()) THEN 'DELAY' ELSE 'NORMAL' END AS TYPE, CASE WHEN F1.PCPU9D &gt; 0 THEN 'COMPLETE' ELSE '' END AS EXIST FROM WAVEDLIB.F9D00 F1 LEFT JOIN WAVEDLIB.F9G00 ON F1.PSHN9D=PSHN9G LEFT JOIN WAVEDLIB.F9F00 ON F1.PSCN9D=RLTN9F AND RLTN9F&lt;&gt;PSCN9F LEFT JOIN WAVEDLIB.F9D00 F2 ON PSCN9F=F2.PSCN9D LEFT JOIN WAVEDLIB.TRZ50 TRZ11 ON F1.PSHN9D=TRZ11.PSHNRZ AND TRZ11.COMFRZ&lt;&gt;'1' LEFT JOIN WAVEDLIB.TRZ50 TRZ12 ON F1.PSHN9D=TRZ12.PSHNRZ AND TRZ12.COMFRZ='1' WHERE F1.PSHN9D='&quot;+stPR+&quot;' GROUP BY F1.PSCN9D,F1.PSHN9D,F1.EPFU9D,F1.PCPU9D,F1.LN1C9D,F1.LN2C9D,F1.ITMC9D,TRZ11.COMFRZ,TRZ12.COMFRZ,F2.PSCN9D,F2.PSHN9D,F2.PCPU9D,F2.LN1C9D,PDSC9G ORDER BY F2.PCPU9D&quot;]" ConnectionString="Dsn=WAVEDLIB">
+                                          <ui:ExecuteQuery.Parameters>
+                                            <scg:Dictionary x:TypeArguments="x:String, Argument" />
+                                          </ui:ExecuteQuery.Parameters>
+                                          <sap:WorkflowViewStateService.ViewState>
+                                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                            </scg:Dictionary>
+                                          </sap:WorkflowViewStateService.ViewState>
+                                        </ui:ExecuteQuery>
+                                        <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="338,160" sap2010:WorkflowViewState.IdRef="MultipleAssign_3">
+                                          <ui:MultipleAssign.AssignOperations>
+                                            <scg:List x:TypeArguments="ui:AssignOperation" Capacity="8">
+                                              <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_11">
+                                                <ui:AssignOperation.To>
+                                                  <OutArgument x:TypeArguments="x:String">[stPR]</OutArgument>
+                                                </ui:AssignOperation.To>
+                                                <ui:AssignOperation.Value>
+                                                  <InArgument x:TypeArguments="x:String">[dt_PRStatus.Rows(0)(10).ToString]</InArgument>
+                                                </ui:AssignOperation.Value>
+                                              </ui:AssignOperation>
+                                              <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_12">
+                                                <ui:AssignOperation.To>
+                                                  <OutArgument x:TypeArguments="x:String">[stLine]</OutArgument>
+                                                </ui:AssignOperation.To>
+                                                <ui:AssignOperation.Value>
+                                                  <InArgument x:TypeArguments="x:String">[dt_PRStatus.Rows(0)(11).ToString]</InArgument>
+                                                </ui:AssignOperation.Value>
+                                              </ui:AssignOperation>
+                                              <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_13">
+                                                <ui:AssignOperation.To>
+                                                  <OutArgument x:TypeArguments="x:String">[stStatus]</OutArgument>
+                                                </ui:AssignOperation.To>
+                                                <ui:AssignOperation.Value>
+                                                  <InArgument x:TypeArguments="x:String">[dt_PRStatus.Rows(0)(13).ToString]</InArgument>
+                                                </ui:AssignOperation.Value>
+                                              </ui:AssignOperation>
+                                            </scg:List>
+                                          </ui:MultipleAssign.AssignOperations>
+                                        </ui:MultipleAssign>
+                                        <ui:ExcelWriteCell Cell="[&quot;O&quot;+currentRow.ToString]" DisplayName="Write Cell" sap:VirtualizedContainerService.HintSize="338,87" sap2010:WorkflowViewState.IdRef="ExcelWriteCell_17" SheetName="REMAIND PR" Text="[stStatus]" />
+                                      </Sequence>
+                                      <If Condition="[stStatus=&quot;NOT YET&quot;]" DisplayName="If NOT YET SEC1" sap:VirtualizedContainerService.HintSize="2204,3613" sap2010:WorkflowViewState.IdRef="If_59">
+                                        <sap:WorkflowViewStateService.ViewState>
+                                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                          </scg:Dictionary>
+                                        </sap:WorkflowViewStateService.ViewState>
+                                        <If.Then>
+                                          <Sequence DisplayName="CHECK PR STATUS" sap:VirtualizedContainerService.HintSize="2059,3466" sap2010:WorkflowViewState.IdRef="Sequence_255">
+                                            <sap:WorkflowViewStateService.ViewState>
+                                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                              </scg:Dictionary>
+                                            </sap:WorkflowViewStateService.ViewState>
+                                            <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="2017,3374" sap2010:WorkflowViewState.IdRef="Sequence_254">
+                                              <sap:WorkflowViewStateService.ViewState>
+                                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                                </scg:Dictionary>
+                                              </sap:WorkflowViewStateService.ViewState>
+                                              <ui:ExcelWriteCell Cell="[&quot;P&quot;+currentRow.ToString]" DisplayName="Write Cell" sap:VirtualizedContainerService.HintSize="1975,87" sap2010:WorkflowViewState.IdRef="ExcelWriteCell_7" SheetName="REMAIND PR" Text="[stPR]" />
+                                              <ui:ExcelWriteCell Cell="[&quot;Q&quot;+currentRow.ToString]" DisplayName="Write Cell" sap:VirtualizedContainerService.HintSize="1975,87" sap2010:WorkflowViewState.IdRef="ExcelWriteCell_16" SheetName="REMAIND PR" Text="[stLine]" />
+                                              <If Condition="[stPR.Contains(&quot;PR&quot;)]" DisplayName="If PR2 NOT PRINT PR" sap:VirtualizedContainerService.HintSize="1975,3028" sap2010:WorkflowViewState.IdRef="If_68">
+                                                <If.Then>
+                                                  <Sequence DisplayName="CHECK PR2" sap:VirtualizedContainerService.HintSize="1596,2881" sap2010:WorkflowViewState.IdRef="Sequence_270">
+                                                    <sap:WorkflowViewStateService.ViewState>
+                                                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                                      </scg:Dictionary>
+                                                    </sap:WorkflowViewStateService.ViewState>
+                                                    <ui:ExecuteQuery ContinueOnError="{x:Null}" ExistingDbConnection="{x:Null}" TimeoutMS="{x:Null}" CommandType="Text" DataTable="[dt_PRStatus]" DisplayName="Execute Query" sap:VirtualizedContainerService.HintSize="1554,88" sap2010:WorkflowViewState.IdRef="ExecuteQuery_10" ProviderName="System.Data.Odbc" Sql="[&quot;SELECT F1.PSCN9D,F1.PSHN9D,F1.EPFU9D,F1.PCPU9D,F1.LN1C9D,F1.LN2C9D,F1.ITMC9D, TRZ11.COMFRZ B_N,TRZ12.COMFRZ B_C, F2.PSCN9D, CASE WHEN F2.PSHN9D='' THEN F2.PSCN9D  ELSE F2.PSHN9D END AS PR,F2.LN1C9D,F2.PCPU9D, CASE WHEN F1.PCPU9D &gt; 0 THEN 'COMP' ELSE CASE WHEN F1.LN1C9D IN ('510','511') THEN 'OK' WHEN TRZ12.COMFRZ IS NULL AND TRZ11.COMFRZ IS NULL AND F2.PSCN9D IS NULL THEN 'NO PR/BOX' WHEN TRZ12.COMFRZ = '1' THEN 'OK' WHEN TRZ11.COMFRZ= '0' THEN 'W-AWH' WHEN F2.PCPU9D &gt; 0 THEN 'OTHER' ELSE 'NOT YET' END END AS M_STATUS,  CASE WHEN PDSC9G = '1' THEN 'REMAKE' WHEN F1.LN2C9D IN ('51','52') THEN 'SAMPLE' WHEN F1.EPFU9D &lt; YEAR(NOW())*10000+MONTH(NOW())*100+DAY(NOW()) THEN 'DELAY' ELSE 'NORMAL' END AS TYPE, CASE WHEN F1.PCPU9D &gt; 0 THEN 'COMPLETE' ELSE '' END AS EXIST FROM WAVEDLIB.F9D00 F1 LEFT JOIN WAVEDLIB.F9G00 ON F1.PSHN9D=PSHN9G LEFT JOIN WAVEDLIB.F9F00 ON F1.PSCN9D=RLTN9F AND RLTN9F&lt;&gt;PSCN9F LEFT JOIN WAVEDLIB.F9D00 F2 ON PSCN9F=F2.PSCN9D LEFT JOIN WAVEDLIB.TRZ50 TRZ11 ON F1.PSHN9D=TRZ11.PSHNRZ AND TRZ11.COMFRZ&lt;&gt;'1' LEFT JOIN WAVEDLIB.TRZ50 TRZ12 ON F1.PSHN9D=TRZ12.PSHNRZ AND TRZ12.COMFRZ='1' WHERE F1.PSHN9D='&quot;+stPR+&quot;' GROUP BY F1.PSCN9D,F1.PSHN9D,F1.EPFU9D,F1.PCPU9D,F1.LN1C9D,F1.LN2C9D,F1.ITMC9D,TRZ11.COMFRZ,TRZ12.COMFRZ,F2.PSCN9D,F2.PSHN9D,F2.PCPU9D,F2.LN1C9D,PDSC9G ORDER BY F2.PCPU9D&quot;]" ConnectionString="Dsn=WAVEDLIB">
+                                                      <ui:ExecuteQuery.Parameters>
+                                                        <scg:Dictionary x:TypeArguments="x:String, Argument" />
+                                                      </ui:ExecuteQuery.Parameters>
+                                                      <sap:WorkflowViewStateService.ViewState>
+                                                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                                        </scg:Dictionary>
+                                                      </sap:WorkflowViewStateService.ViewState>
+                                                    </ui:ExecuteQuery>
+                                                    <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="1554,160" sap2010:WorkflowViewState.IdRef="MultipleAssign_6">
+                                                      <ui:MultipleAssign.AssignOperations>
+                                                        <scg:List x:TypeArguments="ui:AssignOperation" Capacity="8">
+                                                          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_22">
+                                                            <ui:AssignOperation.To>
+                                                              <OutArgument x:TypeArguments="x:String">[stPR]</OutArgument>
+                                                            </ui:AssignOperation.To>
+                                                            <ui:AssignOperation.Value>
+                                                              <InArgument x:TypeArguments="x:String">[dt_PRStatus.Rows(0)(10).ToString]</InArgument>
+                                                            </ui:AssignOperation.Value>
+                                                          </ui:AssignOperation>
+                                                          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_23">
+                                                            <ui:AssignOperation.To>
+                                                              <OutArgument x:TypeArguments="x:String">[stLine]</OutArgument>
+                                                            </ui:AssignOperation.To>
+                                                            <ui:AssignOperation.Value>
+                                                              <InArgument x:TypeArguments="x:String">[dt_PRStatus.Rows(0)(11).ToString]</InArgument>
+                                                            </ui:AssignOperation.Value>
+                                                          </ui:AssignOperation>
+                                                          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_24">
+                                                            <ui:AssignOperation.To>
+                                                              <OutArgument x:TypeArguments="x:String">[stStatus]</OutArgument>
+                                                            </ui:AssignOperation.To>
+                                                            <ui:AssignOperation.Value>
+                                                              <InArgument x:TypeArguments="x:String">[dt_PRStatus.Rows(0)(13).ToString]</InArgument>
+                                                            </ui:AssignOperation.Value>
+                                                          </ui:AssignOperation>
+                                                        </scg:List>
+                                                      </ui:MultipleAssign.AssignOperations>
+                                                    </ui:MultipleAssign>
+                                                    <ui:ExcelWriteCell Cell="[&quot;R&quot;+currentRow.ToString]" DisplayName="Write Cell" sap:VirtualizedContainerService.HintSize="1554,87" sap2010:WorkflowViewState.IdRef="ExcelWriteCell_18" SheetName="REMAIND PR" Text="[stStatus]" />
+                                                    <If Condition="[stStatus=&quot;NOT YET&quot;]" sap:VirtualizedContainerService.HintSize="1554,2334" sap2010:WorkflowViewState.IdRef="If_63">
+                                                      <sap:WorkflowViewStateService.ViewState>
+                                                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                                          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                                        </scg:Dictionary>
+                                                      </sap:WorkflowViewStateService.ViewState>
+                                                      <If.Then>
+                                                        <Sequence sap:VirtualizedContainerService.HintSize="1409,2187" sap2010:WorkflowViewState.IdRef="Sequence_267">
+                                                          <sap:WorkflowViewStateService.ViewState>
+                                                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                                            </scg:Dictionary>
+                                                          </sap:WorkflowViewStateService.ViewState>
+                                                          <ui:ExcelWriteCell Cell="[&quot;S&quot;+currentRow.ToString]" DisplayName="Write Cell" sap:VirtualizedContainerService.HintSize="1367,87" sap2010:WorkflowViewState.IdRef="ExcelWriteCell_19" SheetName="REMAIND PR" Text="[stPR]" />
+                                                          <ui:ExcelWriteCell Cell="[&quot;T&quot;+currentRow.ToString]" DisplayName="Write Cell" sap:VirtualizedContainerService.HintSize="1367,87" sap2010:WorkflowViewState.IdRef="ExcelWriteCell_20" SheetName="REMAIND PR" Text="[stLine]" />
+                                                          <If Condition="[stPR.Contains(&quot;PR&quot;)]" DisplayName="If PR2 NOT PRINT PR" sap:VirtualizedContainerService.HintSize="1367,1841" sap2010:WorkflowViewState.IdRef="If_67">
+                                                            <If.Then>
+                                                              <Sequence DisplayName="CHECK PR3" sap:VirtualizedContainerService.HintSize="988,1694" sap2010:WorkflowViewState.IdRef="Sequence_271">
+                                                                <sap:WorkflowViewStateService.ViewState>
+                                                                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                                                  </scg:Dictionary>
+                                                                </sap:WorkflowViewStateService.ViewState>
+                                                                <ui:ExecuteQuery ContinueOnError="{x:Null}" ExistingDbConnection="{x:Null}" TimeoutMS="{x:Null}" CommandType="Text" DataTable="[dt_PRStatus]" DisplayName="Execute Query" sap:VirtualizedContainerService.HintSize="946,88" sap2010:WorkflowViewState.IdRef="ExecuteQuery_11" ProviderName="System.Data.Odbc" Sql="[&quot;SELECT F1.PSCN9D,F1.PSHN9D,F1.EPFU9D,F1.PCPU9D,F1.LN1C9D,F1.LN2C9D,F1.ITMC9D, TRZ11.COMFRZ B_N,TRZ12.COMFRZ B_C, F2.PSCN9D, CASE WHEN F2.PSHN9D='' THEN F2.PSCN9D  ELSE F2.PSHN9D END AS PR,F2.LN1C9D,F2.PCPU9D, CASE WHEN F1.PCPU9D &gt; 0 THEN 'COMP' ELSE CASE WHEN F1.LN1C9D IN ('510','511') THEN 'OK' WHEN TRZ12.COMFRZ IS NULL AND TRZ11.COMFRZ IS NULL AND F2.PSCN9D IS NULL THEN 'NO PR/BOX' WHEN TRZ12.COMFRZ = '1' THEN 'OK' WHEN TRZ11.COMFRZ= '0' THEN 'W-AWH' WHEN F2.PCPU9D &gt; 0 THEN 'OTHER' ELSE 'NOT YET' END END AS M_STATUS,  CASE WHEN PDSC9G = '1' THEN 'REMAKE' WHEN F1.LN2C9D IN ('51','52') THEN 'SAMPLE' WHEN F1.EPFU9D &lt; YEAR(NOW())*10000+MONTH(NOW())*100+DAY(NOW()) THEN 'DELAY' ELSE 'NORMAL' END AS TYPE, CASE WHEN F1.PCPU9D &gt; 0 THEN 'COMPLETE' ELSE '' END AS EXIST FROM WAVEDLIB.F9D00 F1 LEFT JOIN WAVEDLIB.F9G00 ON F1.PSHN9D=PSHN9G LEFT JOIN WAVEDLIB.F9F00 ON F1.PSCN9D=RLTN9F AND RLTN9F&lt;&gt;PSCN9F LEFT JOIN WAVEDLIB.F9D00 F2 ON PSCN9F=F2.PSCN9D LEFT JOIN WAVEDLIB.TRZ50 TRZ11 ON F1.PSHN9D=TRZ11.PSHNRZ AND TRZ11.COMFRZ&lt;&gt;'1' LEFT JOIN WAVEDLIB.TRZ50 TRZ12 ON F1.PSHN9D=TRZ12.PSHNRZ AND TRZ12.COMFRZ='1' WHERE F1.PSHN9D='&quot;+stPR+&quot;' GROUP BY F1.PSCN9D,F1.PSHN9D,F1.EPFU9D,F1.PCPU9D,F1.LN1C9D,F1.LN2C9D,F1.ITMC9D,TRZ11.COMFRZ,TRZ12.COMFRZ,F2.PSCN9D,F2.PSHN9D,F2.PCPU9D,F2.LN1C9D,PDSC9G ORDER BY F2.PCPU9D&quot;]" ConnectionString="Dsn=WAVEDLIB">
+                                                                  <ui:ExecuteQuery.Parameters>
+                                                                    <scg:Dictionary x:TypeArguments="x:String, Argument" />
+                                                                  </ui:ExecuteQuery.Parameters>
+                                                                  <sap:WorkflowViewStateService.ViewState>
+                                                                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                                      <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                                                    </scg:Dictionary>
+                                                                  </sap:WorkflowViewStateService.ViewState>
+                                                                </ui:ExecuteQuery>
+                                                                <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="946,160" sap2010:WorkflowViewState.IdRef="MultipleAssign_7">
+                                                                  <ui:MultipleAssign.AssignOperations>
+                                                                    <scg:List x:TypeArguments="ui:AssignOperation" Capacity="8">
+                                                                      <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_25">
+                                                                        <ui:AssignOperation.To>
+                                                                          <OutArgument x:TypeArguments="x:String">[stPR]</OutArgument>
+                                                                        </ui:AssignOperation.To>
+                                                                        <ui:AssignOperation.Value>
+                                                                          <InArgument x:TypeArguments="x:String">[dt_PRStatus.Rows(0)(10).ToString]</InArgument>
+                                                                        </ui:AssignOperation.Value>
+                                                                      </ui:AssignOperation>
+                                                                      <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_26">
+                                                                        <ui:AssignOperation.To>
+                                                                          <OutArgument x:TypeArguments="x:String">[stLine]</OutArgument>
+                                                                        </ui:AssignOperation.To>
+                                                                        <ui:AssignOperation.Value>
+                                                                          <InArgument x:TypeArguments="x:String">[dt_PRStatus.Rows(0)(11).ToString]</InArgument>
+                                                                        </ui:AssignOperation.Value>
+                                                                      </ui:AssignOperation>
+                                                                      <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_27">
+                                                                        <ui:AssignOperation.To>
+                                                                          <OutArgument x:TypeArguments="x:String">[stStatus]</OutArgument>
+                                                                        </ui:AssignOperation.To>
+                                                                        <ui:AssignOperation.Value>
+                                                                          <InArgument x:TypeArguments="x:String">[dt_PRStatus.Rows(0)(13).ToString]</InArgument>
+                                                                        </ui:AssignOperation.Value>
+                                                                      </ui:AssignOperation>
+                                                                    </scg:List>
+                                                                  </ui:MultipleAssign.AssignOperations>
+                                                                </ui:MultipleAssign>
+                                                                <ui:ExcelWriteCell Cell="[&quot;U&quot;+currentRow.ToString]" DisplayName="Write Cell" sap:VirtualizedContainerService.HintSize="946,87" sap2010:WorkflowViewState.IdRef="ExcelWriteCell_21" SheetName="REMAIND PR" Text="[stStatus]" />
+                                                                <If Condition="[stStatus=&quot;NOT YET&quot;]" DisplayName="If NOT YET SEC3" sap:VirtualizedContainerService.HintSize="946,1147" sap2010:WorkflowViewState.IdRef="If_62">
+                                                                  <sap:WorkflowViewStateService.ViewState>
+                                                                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                                                      <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                                                    </scg:Dictionary>
+                                                                  </sap:WorkflowViewStateService.ViewState>
+                                                                  <If.Then>
+                                                                    <Sequence sap:VirtualizedContainerService.HintSize="801,1000" sap2010:WorkflowViewState.IdRef="Sequence_273">
+                                                                      <sap:WorkflowViewStateService.ViewState>
+                                                                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                                                        </scg:Dictionary>
+                                                                      </sap:WorkflowViewStateService.ViewState>
+                                                                      <ui:ExcelWriteCell Cell="[&quot;V&quot;+currentRow.ToString]" DisplayName="Write Cell" sap:VirtualizedContainerService.HintSize="759,87" sap2010:WorkflowViewState.IdRef="ExcelWriteCell_22" SheetName="REMAIND PR" Text="[stPR]" />
+                                                                      <ui:ExcelWriteCell Cell="[&quot;W&quot;+currentRow.ToString]" DisplayName="Write Cell" sap:VirtualizedContainerService.HintSize="759,87" sap2010:WorkflowViewState.IdRef="ExcelWriteCell_23" SheetName="REMAIND PR" Text="[stLine]" />
+                                                                      <If Condition="[stPR.Contains(&quot;PR&quot;)]" DisplayName="If PR2 NOT PRINT PR" sap:VirtualizedContainerService.HintSize="759,654" sap2010:WorkflowViewState.IdRef="If_66">
+                                                                        <If.Then>
+                                                                          <Sequence DisplayName="CHECK PR4" sap:VirtualizedContainerService.HintSize="380,507" sap2010:WorkflowViewState.IdRef="Sequence_272">
+                                                                            <sap:WorkflowViewStateService.ViewState>
+                                                                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                                                              </scg:Dictionary>
+                                                                            </sap:WorkflowViewStateService.ViewState>
+                                                                            <ui:ExecuteQuery ContinueOnError="{x:Null}" ExistingDbConnection="{x:Null}" TimeoutMS="{x:Null}" CommandType="Text" DataTable="[dt_PRStatus]" DisplayName="Execute Query" sap:VirtualizedContainerService.HintSize="338,88" sap2010:WorkflowViewState.IdRef="ExecuteQuery_12" ProviderName="System.Data.Odbc" Sql="[&quot;SELECT F1.PSCN9D,F1.PSHN9D,F1.EPFU9D,F1.PCPU9D,F1.LN1C9D,F1.LN2C9D,F1.ITMC9D, TRZ11.COMFRZ B_N,TRZ12.COMFRZ B_C, F2.PSCN9D, CASE WHEN F2.PSHN9D='' THEN F2.PSCN9D  ELSE F2.PSHN9D END AS PR,F2.LN1C9D,F2.PCPU9D, CASE WHEN F1.PCPU9D &gt; 0 THEN 'COMP' ELSE CASE WHEN F1.LN1C9D IN ('510','511') THEN 'OK' WHEN TRZ12.COMFRZ IS NULL AND TRZ11.COMFRZ IS NULL AND F2.PSCN9D IS NULL THEN 'NO PR/BOX' WHEN TRZ12.COMFRZ = '1' THEN 'OK' WHEN TRZ11.COMFRZ= '0' THEN 'W-AWH' WHEN F2.PCPU9D &gt; 0 THEN 'OTHER' ELSE 'NOT YET' END END AS M_STATUS,  CASE WHEN PDSC9G = '1' THEN 'REMAKE' WHEN F1.LN2C9D IN ('51','52') THEN 'SAMPLE' WHEN F1.EPFU9D &lt; YEAR(NOW())*10000+MONTH(NOW())*100+DAY(NOW()) THEN 'DELAY' ELSE 'NORMAL' END AS TYPE, CASE WHEN F1.PCPU9D &gt; 0 THEN 'COMPLETE' ELSE '' END AS EXIST FROM WAVEDLIB.F9D00 F1 LEFT JOIN WAVEDLIB.F9G00 ON F1.PSHN9D=PSHN9G LEFT JOIN WAVEDLIB.F9F00 ON F1.PSCN9D=RLTN9F AND RLTN9F&lt;&gt;PSCN9F LEFT JOIN WAVEDLIB.F9D00 F2 ON PSCN9F=F2.PSCN9D LEFT JOIN WAVEDLIB.TRZ50 TRZ11 ON F1.PSHN9D=TRZ11.PSHNRZ AND TRZ11.COMFRZ&lt;&gt;'1' LEFT JOIN WAVEDLIB.TRZ50 TRZ12 ON F1.PSHN9D=TRZ12.PSHNRZ AND TRZ12.COMFRZ='1' WHERE F1.PSHN9D='&quot;+stPR+&quot;' GROUP BY F1.PSCN9D,F1.PSHN9D,F1.EPFU9D,F1.PCPU9D,F1.LN1C9D,F1.LN2C9D,F1.ITMC9D,TRZ11.COMFRZ,TRZ12.COMFRZ,F2.PSCN9D,F2.PSHN9D,F2.PCPU9D,F2.LN1C9D,PDSC9G ORDER BY F2.PCPU9D&quot;]" ConnectionString="Dsn=WAVEDLIB">
+                                                                              <ui:ExecuteQuery.Parameters>
+                                                                                <scg:Dictionary x:TypeArguments="x:String, Argument" />
+                                                                              </ui:ExecuteQuery.Parameters>
+                                                                              <sap:WorkflowViewStateService.ViewState>
+                                                                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                                                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                                                                </scg:Dictionary>
+                                                                              </sap:WorkflowViewStateService.ViewState>
+                                                                            </ui:ExecuteQuery>
+                                                                            <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="338,160" sap2010:WorkflowViewState.IdRef="MultipleAssign_8">
+                                                                              <ui:MultipleAssign.AssignOperations>
+                                                                                <scg:List x:TypeArguments="ui:AssignOperation" Capacity="8">
+                                                                                  <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_28">
+                                                                                    <ui:AssignOperation.To>
+                                                                                      <OutArgument x:TypeArguments="x:String">[stPR]</OutArgument>
+                                                                                    </ui:AssignOperation.To>
+                                                                                    <ui:AssignOperation.Value>
+                                                                                      <InArgument x:TypeArguments="x:String">[dt_PRStatus.Rows(0)(10).ToString]</InArgument>
+                                                                                    </ui:AssignOperation.Value>
+                                                                                  </ui:AssignOperation>
+                                                                                  <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_29">
+                                                                                    <ui:AssignOperation.To>
+                                                                                      <OutArgument x:TypeArguments="x:String">[stLine]</OutArgument>
+                                                                                    </ui:AssignOperation.To>
+                                                                                    <ui:AssignOperation.Value>
+                                                                                      <InArgument x:TypeArguments="x:String">[dt_PRStatus.Rows(0)(11).ToString]</InArgument>
+                                                                                    </ui:AssignOperation.Value>
+                                                                                  </ui:AssignOperation>
+                                                                                  <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_30">
+                                                                                    <ui:AssignOperation.To>
+                                                                                      <OutArgument x:TypeArguments="x:String">[stStatus]</OutArgument>
+                                                                                    </ui:AssignOperation.To>
+                                                                                    <ui:AssignOperation.Value>
+                                                                                      <InArgument x:TypeArguments="x:String">[dt_PRStatus.Rows(0)(13).ToString]</InArgument>
+                                                                                    </ui:AssignOperation.Value>
+                                                                                  </ui:AssignOperation>
+                                                                                </scg:List>
+                                                                              </ui:MultipleAssign.AssignOperations>
+                                                                            </ui:MultipleAssign>
+                                                                            <ui:ExcelWriteCell Cell="[&quot;X&quot;+currentRow.ToString]" DisplayName="Write Cell" sap:VirtualizedContainerService.HintSize="338,87" sap2010:WorkflowViewState.IdRef="ExcelWriteCell_24" SheetName="REMAIND PR" Text="[stStatus]" />
+                                                                          </Sequence>
+                                                                        </If.Then>
+                                                                        <If.Else>
+                                                                          <ui:ExcelWriteCell Cell="[&quot;X&quot;+currentRow.ToString]" DisplayName="Write Cell" sap:VirtualizedContainerService.HintSize="334,87" sap2010:WorkflowViewState.IdRef="ExcelWriteCell_26" SheetName="REMAIND PR" Text="NOT PRINT PR" />
+                                                                        </If.Else>
+                                                                      </If>
+                                                                    </Sequence>
+                                                                  </If.Then>
+                                                                </If>
+                                                              </Sequence>
+                                                            </If.Then>
+                                                            <If.Else>
+                                                              <ui:ExcelWriteCell Cell="[&quot;U&quot;+currentRow.ToString]" DisplayName="Write Cell" sap:VirtualizedContainerService.HintSize="334,87" sap2010:WorkflowViewState.IdRef="ExcelWriteCell_27" SheetName="REMAIND PR" Text="NOT PRINT PR" />
+                                                            </If.Else>
+                                                          </If>
+                                                        </Sequence>
+                                                      </If.Then>
+                                                    </If>
+                                                  </Sequence>
+                                                </If.Then>
+                                                <If.Else>
+                                                  <ui:ExcelWriteCell Cell="[&quot;R&quot;+currentRow.ToString]" DisplayName="Write Cell" sap:VirtualizedContainerService.HintSize="334,87" sap2010:WorkflowViewState.IdRef="ExcelWriteCell_28" SheetName="REMAIND PR" Text="NOT PRINT PR" />
+                                                </If.Else>
+                                              </If>
+                                            </Sequence>
+                                          </Sequence>
+                                        </If.Then>
+                                      </If>
+                                    </Sequence>
+                                  </If.Then>
+                                  <If.Else>
+                                    <ui:ExcelWriteCell Cell="[&quot;O&quot;+currentRow.ToString]" DisplayName="Write Cell" sap:VirtualizedContainerService.HintSize="334,87" sap2010:WorkflowViewState.IdRef="ExcelWriteCell_25" SheetName="REMAIND PR" Text="NOT PRINT PR" />
+                                  </If.Else>
+                                </If>
+                              </Sequence>
+                            </Sequence>
+                          </If.Then>
+                        </If>
+                        <Assign sap:VirtualizedContainerService.HintSize="2854,60" sap2010:WorkflowViewState.IdRef="Assign_267">
+                          <Assign.To>
+                            <OutArgument x:TypeArguments="x:Int32">[currentRow]</OutArgument>
+                          </Assign.To>
+                          <Assign.Value>
+                            <InArgument x:TypeArguments="x:Int32">[currentRow+1]</InArgument>
+                          </Assign.Value>
+                        </Assign>
+                      </Sequence>
+                    </ActivityAction>
+                  </ui:ForEachRow.Body>
+                </ui:ForEachRow>
+                <ui:ExcelCloseWorkbook DisplayName="Close Workbook" sap:VirtualizedContainerService.HintSize="2946,59" sap2010:WorkflowViewState.IdRef="ExcelCloseWorkbook_1" Workbook="[wbInput]">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                </ui:ExcelCloseWorkbook>
+              </Sequence>
+            </ActivityAction>
+          </ui:ExcelApplicationScope.Body>
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+              <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+        </ui:ExcelApplicationScope>
+        <ui:CopyFile ContinueOnError="{x:Null}" Destination="[&quot;H:\_SCANNER\0.LUU HINH CUA CAC BO PHAN\6.SLD\SLD - RPA\Wings Material Status&quot; + &quot;_&quot; + DateTime.Now.ToString(&quot;yyyyMMdd&quot;) + &quot;_&quot; + DateTime.Now.ToString(&quot;HHmmss&quot;) + &quot;.xlsx&quot;]" DisplayName="Copy File" sap:VirtualizedContainerService.HintSize="3022,157" sap2010:WorkflowViewState.IdRef="CopyFile_1" Overwrite="False" Path="H:\_SCANNER\0.LUU HINH CUA CAC BO PHAN\6.SLD\SLD - RPA\Wings Material Status_RPA_NOT OPEN.xlsx">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+        </ui:CopyFile>
+      </Sequence>
+    </FlowStep>
+    <FlowStep x:Name="__ReferenceID1">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <av:Point x:Key="ShapeLocation">200,112</av:Point>
+          <av:Size x:Key="ShapeSize">200,66</av:Size>
+          <av:PointCollection x:Key="ConnectorLocation">300,178 300,217</av:PointCollection>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+      <Sequence DisplayName="Sq/Pre-Processing" sap:VirtualizedContainerService.HintSize="200,66" sap2010:WorkflowViewState.IdRef="Sequence_1">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+        <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke Workflow File" sap:VirtualizedContainerService.HintSize="338,87" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="Connect SQL.xaml">
+          <ui:InvokeWorkflowFile.Arguments>
+            <InArgument x:TypeArguments="x:String" x:Key="Query">SELECT * FROM RPALIB.LIBRARY_NT WHERE Name IN ('ServerSavedFile','dirDownFile','ServerTemp')  ORDER BY UPPER(NAME) ASC</InArgument>
+            <OutArgument x:TypeArguments="sd:DataTable" x:Key="dt_Result">[dt_Path]</OutArgument>
+          </ui:InvokeWorkflowFile.Arguments>
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+        </ui:InvokeWorkflowFile>
+        <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke Workflow File" sap:VirtualizedContainerService.HintSize="338,87" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" UnSafe="False" WorkflowFileName="Connect SQL.xaml">
+          <ui:InvokeWorkflowFile.Arguments>
+            <InArgument x:TypeArguments="x:String" x:Key="Query">SELECT * FROM RPALIB.LIBRARY_NT WHERE Name IN ('WingsID','WingsPassword') ORDER BY UPPER(NAME) ASC</InArgument>
+            <OutArgument x:TypeArguments="sd:DataTable" x:Key="dt_Result">[dt_Wings]</OutArgument>
+          </ui:InvokeWorkflowFile.Arguments>
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+        </ui:InvokeWorkflowFile>
+        <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="338,222" sap2010:WorkflowViewState.IdRef="MultipleAssign_1">
+          <ui:MultipleAssign.AssignOperations>
+            <scg:List x:TypeArguments="ui:AssignOperation" Capacity="8">
+              <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_1">
+                <ui:AssignOperation.To>
+                  <OutArgument x:TypeArguments="x:String">[Path_Downloads]</OutArgument>
+                </ui:AssignOperation.To>
+                <ui:AssignOperation.Value>
+                  <InArgument x:TypeArguments="x:String">[dt_Path.Rows(0)(1).ToString]</InArgument>
+                </ui:AssignOperation.Value>
+              </ui:AssignOperation>
+              <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_2">
+                <ui:AssignOperation.To>
+                  <OutArgument x:TypeArguments="x:String">[Path_Folder]</OutArgument>
+                </ui:AssignOperation.To>
+                <ui:AssignOperation.Value>
+                  <InArgument x:TypeArguments="x:String">[dt_Path.Rows(1)(1).ToString]</InArgument>
+                </ui:AssignOperation.Value>
+              </ui:AssignOperation>
+              <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_3">
+                <ui:AssignOperation.To>
+                  <OutArgument x:TypeArguments="x:String">[Path_Template]</OutArgument>
+                </ui:AssignOperation.To>
+                <ui:AssignOperation.Value>
+                  <InArgument x:TypeArguments="x:String">[dt_Path.Rows(2)(1).ToString]</InArgument>
+                </ui:AssignOperation.Value>
+              </ui:AssignOperation>
+              <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_4">
+                <ui:AssignOperation.To>
+                  <OutArgument x:TypeArguments="x:String">[Wing_User]</OutArgument>
+                </ui:AssignOperation.To>
+                <ui:AssignOperation.Value>
+                  <InArgument x:TypeArguments="x:String">[dt_Wings.Rows(0)(1).ToString]</InArgument>
+                </ui:AssignOperation.Value>
+              </ui:AssignOperation>
+              <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_5">
+                <ui:AssignOperation.To>
+                  <OutArgument x:TypeArguments="x:String">[Wing_Password]</OutArgument>
+                </ui:AssignOperation.To>
+                <ui:AssignOperation.Value>
+                  <InArgument x:TypeArguments="x:String">[dt_Wings.Rows(1)(1).ToString]</InArgument>
+                </ui:AssignOperation.Value>
+              </ui:AssignOperation>
+            </scg:List>
+          </ui:MultipleAssign.AssignOperations>
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+        </ui:MultipleAssign>
+      </Sequence>
+      <FlowStep.Next>
+        <x:Reference>__ReferenceID0</x:Reference>
+      </FlowStep.Next>
+    </FlowStep>
+  </Flowchart>
+</Activity>
